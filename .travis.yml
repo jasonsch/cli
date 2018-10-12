@@ -3,5 +3,12 @@ mono: none
 dotnet: 2.1.403
 solution: cli.sln
 script:
-    - dotnet restore
-    - dotnet msbuild -p:Configuration=Release
+- dotnet restore
+- dotnet msbuild -p:Configuration=Release
+deploy:
+  provider: releases
+  api_key:
+    secure: Xv/fwY08FL0JPYDYHSWmu6Qer4V0UzPUZmSdKiQTHcjpAZMOe9/vGFhLzT6MfhdxIqhFiuW9ajNEqS/43iaNjuVeyVI1slmeIU+ZYft7d7hjOidHxa3wVLGtsJG6vfhQDKwwhtLV1lL59kHXhnPbQcKQXVu9eFI+aAT+SPN+fy2cMPb/T/0XH48sasaz6LdgtPB1jUdLEGqakygPaJVQQV3XkdjnAJf9XFfaja/PwX5txNQmAECUvQEor5dm9HxGH/aZhqAU4zgTgjA2eYUqwQjx6Ecnjz24cL296bYDAdGF0wyB/naoRGmdGC5obMwSHPuVoOzecZNP4CiEOjM35QLvym8ui4VMrssmECm69aZHlBGEGuxMpBQsUQvcaE1AnyznbGOHU7zZvqQfWwf0rlNCNWz1MMdDBQ5i4iHXNQnkpiazDf4hPN6Lg7ttBrJTwHP9zyIGp2hBEGsp77oVoa5gGaBiSA+6sY/nlYNylO9sfjfzEFSm3/tVM+LOYNF89nGAvaaXZ4hdRkT8wHMG8ZRvaXgJgjvjY7bHhB3hHMVZUJuBhcKUuSJWZO7hT5jk+CuMAiM5176ZLcSgFwJb9h5m1iRAmwK46ckfePTA8bguZjcdg6Oe4Ny/Zw/vi+mdQ9plZJRrg1MBaLpaHlfp+GeQcfaDxDcBDlzRqqomwHA=
+  file: gcal.dll
+  on:
+    repo: jasonsch/cli
