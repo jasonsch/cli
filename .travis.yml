@@ -2,3 +2,6 @@ language: csharp
 mono: none
 dotnet: 2.1.403
 solution: cli.sln
+script:
+    - dotnet restore
+    - dotnet msbuild -p:Configuration=Release
