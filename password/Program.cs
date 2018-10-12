@@ -51,7 +51,7 @@ namespace password
                 Generator.AddAllGenerators();
             }
 
-            // Console.WriteLine(Generator.Generate(5));
+            Console.WriteLine(Generator.Generate(PasswordMinLength, PasswordMaxLength));
         }
     }
 }
