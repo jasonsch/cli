@@ -14,12 +14,11 @@ namespace gcal
 {
     class Program
     {
-        //
-        // TODO -- Couldn't read multiple event page like: https://www.facebook.com/events/323430185071606/?event_time_id=323430201738271
-        //
-        // TODO -- Handle events that have more than three dates (e.g., https://www.facebook.com/events/234056634022933/ or https://www.facebook.com/events/2062456913782045/) https://www.facebook.com/events/1680188138737029/
+        // TODO -- Handle events that have more than three dates (e.g., https://www.facebook.com/events/262577911273702/)
         // TODO -- Add high level notes about what this program does.
         // TODO -- Need to handle FB events that aren't public (OAuth?)
+        //
+        // TODO -- Couldn't read multiple event page like: https://www.facebook.com/events/323430185071606/?event_time_id=323430201738271
         //
         // C:\Users\jasonsch\code\WindowsCLI\gcal\bin\Release>gcal -c Potential -f https://www.facebook.com/events/184707418897024/
         // ERROR: Couldn't find start/end time!
@@ -53,17 +52,12 @@ namespace gcal
         // C:\Users\jasonsch\code\WindowsCLI\gcal\bin\Release>gcal -c Em-tertainment -f https://www.facebook.com/events/1004070966420330/
         // Event 'a?Sæo^èÎåÎåÎá< Moon Viewing 2018' on '8/25/2018 6:00PM' successfully created at https://www.google.com/calendar/event?eid=OXRtbzFlbjgzZjdidWZrdTRkODI5N2hlNG8gNmdyNXJ0MTFuYWlzZHZobDhiYnR0aDFpaTBAZw
         //
-        // TODO -- Coalesce multi-day events like https://www.facebook.com/events/626414344369451/?event_time_id=626414347702784
+        // TODO -- Coalesce multi-day events like https://www.facebook.com/events/626414344369451/?event_time_id=626414347702784 (maybe prompt the user?)
         //
         private static readonly string[] Scopes = { CalendarService.Scope.Calendar };
         private static readonly string ApplicationName = "gcal";
 
-        static void PrintUsage()
-        {
-            PrintUsage(null);
-        }
-
-        static void PrintUsage(string ErrorMessage)
+        static void PrintUsage(string ErrorMessage = null)
         {
             if (!String.IsNullOrEmpty(ErrorMessage))
             {
