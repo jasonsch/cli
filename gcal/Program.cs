@@ -14,11 +14,48 @@ namespace gcal
 {
     class Program
     {
-        // TODO -- Handle events that have more than three dates (e.g., https://www.facebook.com/events/262577911273702/)
+        /*
+C:\Users\jasonsch\code\cli\gcal\bin\Release\netcoreapp2.1>dotnet gcal.dll -c Potential -f https://www.facebook.com/events/429356794181427/
+
+Unhandled Exception: System.Net.Http.HttpRequestException: No such host is known ---> System.Net.Sockets.SocketException: No such host is known
+   at System.Net.Http.ConnectHelper.ConnectAsync(String host, Int32 port, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Google.Apis.Http.ConfigurableMessageHandler.SendAsync(HttpRequestMessage request, CancellationToken cancellationToken) in C:\Apiary\2018-09-13.09-09-57\Src\Support\Google.Apis.Core\Http\ConfigurableMessageHandler.cs:line 494
+   at System.Net.Http.HttpClient.FinishSendAsyncBuffered(Task`1 sendTask, HttpRequestMessage request, CancellationTokenSource cts, Boolean disposeCts)
+   at Google.Apis.Auth.OAuth2.Requests.TokenRequestExtenstions.ExecuteAsync(TokenRequest request, HttpClient httpClient, String tokenServerUrl, CancellationToken taskCancellationToken, IClock clock) in C:\Apiary\2018-09-13.09-09-57\Src\Support\Google.Apis.Auth\OAuth2\Requests\TokenRequestExtenstions.cs:line 51
+   at Google.Apis.Auth.OAuth2.Flows.AuthorizationCodeFlow.FetchTokenAsync(String userId, TokenRequest request, CancellationToken taskCancellationToken) in C:\Apiary\2018-09-13.09-09-57\Src\Support\Google.Apis.Auth\OAuth2\Flows\AuthorizationCodeFlow.cs:line 315
+   at Google.Apis.Auth.OAuth2.Flows.AuthorizationCodeFlow.RefreshTokenAsync(String userId, String refreshToken, CancellationToken taskCancellationToken) in C:\Apiary\2018-09-13.09-09-57\Src\Support\Google.Apis.Auth\OAuth2\Flows\AuthorizationCodeFlow.cs:line 264
+   at Google.Apis.Auth.OAuth2.UserCredential.RefreshTokenAsync(CancellationToken taskCancellationToken) in C:\Apiary\2018-09-13.09-09-57\Src\Support\Google.Apis.Auth\OAuth2\UserCredential.cs:line 133
+   at Google.Apis.Auth.OAuth2.TokenRefreshManager.RefreshTokenAsync() in C:\Apiary\2018-09-13.09-09-57\Src\Support\Google.Apis.Auth\OAuth2\TokenRefreshManager.cs:line 129
+   at Google.Apis.Auth.OAuth2.TokenRefreshManager.ResultWithUnwrappedExceptions[T](Task`1 task) in C:\Apiary\2018-09-13.09-09-57\Src\Support\Google.Apis.Auth\OAuth2\TokenRefreshManager.cs:line 174
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot)
+--- End of stack trace from previous location where exception was thrown ---
+   at Google.Apis.Auth.OAuth2.TokenRefreshManager.GetAccessTokenForRequestAsync(CancellationToken cancellationToken) in C:\Apiary\2018-09-13.09-09-57\Src\Support\Google.Apis.Auth\OAuth2\TokenRefreshManager.cs:line 114
+   at Google.Apis.Auth.OAuth2.UserCredential.InterceptAsync(HttpRequestMessage request, CancellationToken taskCancellationToken) in C:\Apiary\2018-09-13.09-09-57\Src\Support\Google.Apis.Auth\OAuth2\UserCredential.cs:line 75
+   at Google.Apis.Http.ConfigurableMessageHandler.SendAsync(HttpRequestMessage request, CancellationToken cancellationToken) in C:\Apiary\2018-09-13.09-09-57\Src\Support\Google.Apis.Core\Http\ConfigurableMessageHandler.cs:line 415
+   at System.Net.Http.HttpClient.FinishSendAsyncBuffered(Task`1 sendTask, HttpRequestMessage request, CancellationTokenSource cts, Boolean disposeCts)
+   at Google.Apis.Requests.ClientServiceRequest`1.ExecuteUnparsedAsync(CancellationToken cancellationToken) in C:\Apiary\2018-09-13.09-09-57\Src\Support\Google.Apis\Requests\ClientServiceRequest.cs:line 180
+   at Google.Apis.Requests.ClientServiceRequest`1.Execute() in C:\Apiary\2018-09-13.09-09-57\Src\Support\Google.Apis\Requests\ClientServiceRequest.cs:line 116
+   at gcal.Program.FindCalendarByName(CalendarService service, String CalendarName) in C:\Users\jasonsch\code\cli\gcal\Program.cs:line 154
+   at gcal.Program.<>c__DisplayClass9_0.<Main>b__2(String value) in C:\Users\jasonsch\code\cli\gcal\Program.cs:line 205
+   at Mono.Options.Option.Invoke(OptionContext c)
+   at Mono.Options.OptionSet.Parse(String argument, OptionContext c)
+   at Mono.Options.OptionSet.Parse(IEnumerable`1 arguments)
+   at gcal.Program.Main(String[] args) in C:\Users\jasonsch\code\cli\gcal\Program.cs:line 216
+*/
+        // TODO -- Support for axs events: https://www.axs.com/events/364765/yonder-mountain-string-band-tickets?src=YBOVMWLI48LN98HDVZGPSPQV&t_tags=YBOVMWLI48LN98HDVZGPSPQV&mkt_campaign=YBOVMWLI48LN98HDVZGPSPQV&mkt_source=AMsySZasdJlhYR4SjRVCortnB_PI&mkt_content=A170_A483_C141547&fbclid=IwAR1fE2hUr7vu4wCder8iXQQhMb063vNSxaMmbAbwis4M-yNqxkYSzEk8Vd8
+        // TODO -- Support for cascade bike events (https://www.cascade.org/rides-and-events-major-rides/seattle-bike-n-brews / https://www.cascade.org/rides-and-events-major-rides/seattle-night-ride)
+        // TODO -- Handle siff events (e.g., https://www.siff.net/education/film-appreciation/cinema-dissection/terminator-2)
+        // TODO -- Handle events that have more than three dates (e.g., https://www.facebook.com/events/262577911273702/ or https://www.facebook.com/events/2075275352740171/?event_time_id=2075275389406834)
         // TODO -- Add high level notes about what this program does.
         // TODO -- Need to handle FB events that aren't public (OAuth?)
-        //
+        //      -- https://www.facebook.com/events/163743240932607/
+        // TODO -- Support metafilter IRL events: https://irl.metafilter.com/4074/The-needle-moved-trivially
         // TODO -- Couldn't read multiple event page like: https://www.facebook.com/events/323430185071606/?event_time_id=323430201738271
+        // TODO -- use a recurring entry for FB events with multiple dates/times (or some other way to link them so they can all be [e.g.] deleted together).
         //
         // C:\Users\jasonsch\code\WindowsCLI\gcal\bin\Release>gcal -c Potential -f https://www.facebook.com/events/184707418897024/
         // ERROR: Couldn't find start/end time!
@@ -71,11 +108,11 @@ namespace gcal
             Console.WriteLine("-d, --description <event description>\tThe description for the calendar event");
             Console.WriteLine("-e, --end <date>\tThe end date of the entry");
             Console.WriteLine("-f, --facebook <URL>\tA facebook event URL that is parsed for the event info");
-            Console.WriteLine("-m, --ticketweb <URL>\tAn EventBrite or TicketWeb URL");
             Console.WriteLine("-n, --notification <'email|popup==<time period>'>\tThe type of reminder notification and when to show it.");
             Console.WriteLine("-r, --recurrence <rule>\tA recurrence rule for this event (e.g., 'RRULE:FREQ=DAILY;COUNT=2'). Can be specified multiple times.");
             Console.WriteLine("-s, --start <date>\tThe start date of the entry");
             Console.WriteLine("-t, --title <title>\tThe title for the calendar event");
+            Console.WriteLine("-u, --url<URL>\tAn EventBrite, TicketWeb, or Metafilter IRL URL");
             Console.WriteLine("-w, --where <location>\tThe location for the calendar event");
             Console.WriteLine("-?, -h, --help\tDisplays this usage");
 
@@ -164,7 +201,7 @@ namespace gcal
             string CalendarID = "primary";
             EventInformation EventInfo = new EventInformation();
             string FacebookURL = null;
-            string TicketWebUrl = null;
+            string EventUrl = null;
             bool eventAllDay = false;
             List<string> NakedParameters = null;
             bool FlagsPassed = false; // If we don't see any arguments then we act like the classic "cal" command
@@ -203,7 +240,7 @@ namespace gcal
             options.Add("r|recurrence=", value => { EventInfo.AddRecurrenceRule(value); });
             options.Add("s|start=", value => { EventInfo.SetStartDate(value); FlagsPassed = true; });
             options.Add("t|title=", value => { EventInfo.Title = value; FlagsPassed = true; });
-            options.Add("m|ticketweb=", value => { TicketWebUrl = value; FlagsPassed = true; });
+            options.Add("u|url=", value => { EventUrl = value; FlagsPassed = true; });
             options.Add("w|where=", value => { EventInfo.Location = value; FlagsPassed = true; });
 
             NakedParameters = options.Parse(args);
@@ -214,9 +251,9 @@ namespace gcal
                 {
                     HandleFacebookEvent(service, CalendarID, FacebookURL);
                 }
-                else if (!String.IsNullOrEmpty(TicketWebUrl))
+                else if (!String.IsNullOrEmpty(EventUrl))
                 {
-                    HandleTicketwebEvent(service, CalendarID, TicketWebUrl);
+                    HandleTicketwebEvent(service, CalendarID, EventUrl);
                 }
                 else
                 {
@@ -256,7 +293,8 @@ namespace gcal
         {
             List<EventInformation> Events = new List<EventInformation>();
 
-            if (!TicketWebFilter.ParseUrl(Url, Events))
+            // TODO -- Both "filters" download the page; we should centralize that code.
+            if (!MetaFilterFilter.ParseUrl(Url, Events) && !TicketWebFilter.ParseUrl(Url, Events))
             {
                 return false;
             }
