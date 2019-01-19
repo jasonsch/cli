@@ -1,0 +1,773 @@
+﻿
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="readability-verification" content="DCFfHJ4UQbMnfKaS453mfXvyeqtaeZwGSKSjFmv3" />
+    <title>Spring 2019 OR-WA Regional Canpout | IRL: MeFi Events</title>
+    <link href="//d217i264rvtnq0.cloudfront.net/styles/irl/default030516.css" rel="stylesheet" type="text/css">
+    <style type="text/css">
+
+        .smallcopy {
+            font-size: 10pt;
+            font-family: Verdana,sans-serif;
+        }
+
+        a {
+            font-weight: bold;
+            text-decoration: underline;
+        }
+
+        td.copy {
+            font-size: 12pt;
+            font-family: Verdana,sans-serif;
+            line-height: 130%;
+            padding-top: 2px;
+            padding-bottom: 2px;
+        }
+
+        .comments {
+            font-size: 12pt;
+            font-family: Verdana,sans-serif;
+            line-height: 130%;
+            margin-left: 75px;
+            margin-right: 75px;
+        }
+
+        .copy {
+            font-size: 12pt;
+            font-family: Verdana,sans-serif;
+            line-height: 130%;
+            margin-left: 50px;
+            margin-right: 50px;
+            padding-top: 2px;
+            padding-bottom: 2px;
+        }
+
+        p {
+            font-size: 12pt;
+            font-family: Verdana,sans-serif;
+            line-height: 130%;
+            margin-left: 0px;
+            margin-right: 0px;
+            padding-top: 2px;
+            padding-bottom: 2px;
+        }
+
+        blockquote {
+            font-family: Verdana,sans-serif;
+            line-height: 130%;
+            margin-left: 50px;
+            margin-right: 50px;
+            padding-top: 2px;
+            padding-bottom: 2px;
+        }
+
+        .posttitle {
+            font-family: Arial,sans-serif !important;
+        }
+
+        .front {
+            font-size: 14pt !important;
+        }
+
+        .tags {
+            font-size: 13px;
+        }
+
+        .post-text {
+            font-size: 12pt;
+            font-family: Verdana,sans-serif;
+        }
+
+        #boxyright p {
+            font-size: 12px;
+        }
+
+        .clearfix:after {
+            content: ".";
+            display: block;
+            height: 0;
+            clear: both;
+            visibility: hidden;
+        }
+
+        .clearfix {
+            display: inline-block;
+        }
+
+        .clearfix {
+            display: block;
+        }
+
+        .cselected {
+            background-color: #666;
+            padding: 5px;
+        }
+
+        .skip {
+            display: none;
+        }
+
+        .flagdrop {
+            font: 9px Verdana,Arial,sans-serif;
+        }
+
+            .flagdrop option {
+                font: 9px Verdana,Arial,sans-serif;
+            }
+
+        .mmicon {
+            vertical-align: middle;
+            width: 10px;
+            height: 8px;
+            display: inline-block;
+            background: url(//d217i264rvtnq0.cloudfront.net/images/mefi/mefisprite091911.png) 0px -13px no-repeat;
+        }
+
+        .mmon {
+            background-position: 0px -2px;
+        }
+
+        .oldFav {
+            display: none;
+        }
+
+        .new {
+            color: #fff;
+        }
+
+        #triangle {
+            position: absolute;
+            display: none;
+            line-height: 0;
+            height: 0;
+            width: 0;
+            left: 0;
+            top: 0;
+            border: 10px solid transparent;
+            border-left-color: #369;
+        }
+
+        body {
+            background-position: 0px 16px;
+        }
+
+        .chromeleft {
+            margin-left: 30px;
+        }
+
+        .uchromeleft {
+            margin-left: 20px;
+        }
+
+        .chromeright {
+            margin-right: 30px;
+        }
+
+        .uchromeright {
+            margin-right: 50px;
+        }
+
+        h2.posttitle {
+            margin-top: 0px;
+        }
+
+        .flagbox {
+            z-index: 9999;
+            background: #4D2B17;
+            text-align: left;
+            padding: 5px;
+            margin-top: 5px;
+            display: table;
+        }
+
+        .icon-flag {
+            vertical-align: middle;
+        }
+
+        .flagnote {
+            width: 262px;
+            height: 56px;
+            margin-top: 3px;
+        }
+
+        .redbutton {
+            color: #eee;
+            font: bold 12px Helvetica, Arial, sans-serif;
+            text-decoration: none;
+            padding: 7px 12px;
+            position: relative;
+            display: inline-block;
+            text-shadow: 0 1px 0 #444;
+            -webkit-transition: border-color .218s;
+            -moz-transition: border .218s;
+            -o-transition: border-color .218s;
+            transition: border-color .218s;
+            background: #C63828;
+            background: -webkit-gradient(linear,0% 40%,0% 70%,from(#C63828),to(#bd3526));
+            background: -moz-linear-gradient(linear,0% 40%,0% 70%,from(#C63828),to(#bd3526));
+            border: none;
+            border-radius: 2px;
+            -webkit-border-radius: 2px;
+            -moz-border-radius: 2px;
+        }
+
+            .redbutton:hover {
+                background: #bd3526;
+                -moz-box-shadow: 0 2px 0 rgba(0,0,0,0.2) 0 2px 5px rgba(0,0,0,0.2);
+                box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+            }
+
+        a.flag {
+            color: #cc0 !important;
+        }
+    </style>
+    <!--[if lte IE 7]><link rel="stylesheet" type="text/css" href="//d217i264rvtnq0.cloudfront.net/styles/ie021712b.css"><![endif]-->
+    <!--[if IE 6]><link rel="stylesheet" type="text/css" href="//d217i264rvtnq0.cloudfront.net/styles/ie6021712.css"><![endif]-->
+    <meta name="verify-v1" content="gEOzJ94HBqDkKWgGb+DkZb3ztZIprg+2l8JVSh7CaQM=">
+    <meta http-equiv="x-dns-prefetch-control" content="off">
+    <meta name="application-name" content="MetaFilter">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png?ver=030816">
+    <base target="_self">
+    <link rel="icon" href="//d217i264rvtnq0.cloudfront.net/styles/irl/favicon030716c.ico" type="image/ico">
+    <link rel="SHORTCUT ICON" href="//d217i264rvtnq0.cloudfront.net/styles/irl/favicon030716c.ico">
+    <link rel="search" type="application/opensearchdescription+xml" href="http://www.metafilter.com/opensearch.xml" title="MeFi Site Search">
+    <link rel="canonical" href="http://irl.metafilter.com/4133/Spring-2019-OR-WA-Regional-Canpout" id="canonical">
+    <link rel="alternate" type="application/rss+xml" title="Comments on: Spring 2019 OR-WA Regional Canpout" href="http://irl.metafilter.com/4133/Spring-2019-OR-WA-Regional-Canpout/rss">
+    <link rel="alternate" type="application/rss+xml" title="Popular Posts" href="http://feeds.feedburner.com/mefi/PopularPosts">
+    <link rel="alternate" type="application/rss+xml" title="Popular Comments" href="http://feeds.feedburner.com/mefi/PopularComments">
+    <link rel="stylesheet" type="text/css" media="handheld" href="//d217i264rvtnq0.cloudfront.net/styles/mefi/handheld042210.css">
+    <link rel="stylesheet" type="text/css" media="print" href="//d217i264rvtnq0.cloudfront.net/styles/print010712-min.css">
+    <script type="text/javascript">
+function addEvent(b,a,c){if(b.addEventListener){b.addEventListener(a,c,false);return true}else return b.attachEvent?b.attachEvent("on"+a,c):false}
+var cid,lid,sp,et,pint=6E4,pdk=1.2,pfl=20,mb=0,mdrn=0;
+    </script>
+    <script type="text/javascript">function addFav(a,c,b,d,e){alert('The page is still loading, please wait to add favorites.');};function add_to_ra(a,b){alert('The page is still loading, please wait to add to activity.');}</script>
+</head>
+<body id="body">
+    <a href="#content" class="skip">skip to main content</a> <div id="special" style="font-size:10px;text-align:center;background:#444;color:white;padding:2px;">It's time for the <a href='https://metatalk.metafilter.com/25049/Pest-Bost-Contest-for-January-2019'>Best Post Contest!</a> Vote by Fantastic flag! Create a category, make a post, join the fun! (<a href="/index.cfm?hide_banner=1" target="_self">hide</a>)</div>
+    <div id="logo"><a href="//irl.metafilter.com/" target="_self"><img src="//d217i264rvtnq0.cloudfront.net/styles/irl/irl-logoaa.png" alt="IRL: MeFi Events" width="196" height="80" border="0"></a></div>
+    <div id="topline" style="height:26px;line-height:26px;">
+        <ul id="navglobal" style="white-space:nowrap;">
+            <li><a href="//www.metafilter.com/" target="_self">MetaFilter</a></li>
+            <li><a href="//ask.metafilter.com/" target="_self">AskMeFi</a></li>
+            <li><a href="//fanfare.metafilter.com/" target="_self">FanFare</a></li>
+            <li><a href="//projects.metafilter.com/" target="_self">Projects</a></li>
+            <li><a href="//music.metafilter.com/" target="_self">Music</a></li>
+            <li><a href="//jobs.metafilter.com/" target="_self">Jobs</a></li>
+            <li><a href="//podcast.metafilter.com/" target="_self">Podcast</a></li>
+            <li><a href="//irl.metafilter.com/" target="_self">IRL</a></li>
+            <li><a href="//www.metafilter.com/chat/" target="_self">Chat</a></li>
+            <li><a href="//metatalk.metafilter.com/" target="_self">MetaTalk</a></li>
+        </ul>
+    </div>
+    <div id="yellowbar" style="padding-right:10px;">January 17, 2019 9:16 PM </div>
+    <div id="bottomline" style="height:31px;">
+        <div id="navgroup" style="float:left;">
+            <ul id="navseldom" style="white-space:nowrap;">
+                <li><a href="/" target="_self">Home</a></li>
+                <li><a href="//faq.metafilter.com/" target="_self">FAQ</a></li>
+                <li><a href="/archive.mefi" target="_self">Archives</a></li>
+                <li><a href="/tags/" target="_self">Tags</a></li>
+                <li><a href="//bestof.metafilter.com/" target="_self">Best Of</a></li>
+            </ul>
+            <br>
+            <ul id="navoften">
+                <li><a href="/contribute/post.cfm" target="_self" id="newpost">New Event</a></li>
+                <li><a href="//www.metafilter.com/user/451" target="_self">My Profile</a></li>
+                <li><a href="//www.metafilter.com/contribute/customize.cfm" target="_self">Preferences</a></li>
+                <li><a href="//www.metafilter.com/contribute/activity/" target="_self">Recent Activity</a></li>
+                <li><a href="//www.metafilter.com/favorites/451" target="_self">Favorites</a></li>
+            </ul>
+        </div>
+        <div id="search" style="padding-right:10px;width:auto;"><form action="//www.metafilter.com/contribute/search.mefi" method="GET" target="_self" style="margin:0px;padding:0px;"><input type=hidden name=site value="irl"><input type="text" name="q" size="34" style="width:110px;"><input type="submit" value="&raquo;" style="margin-left:5px;"></form></div>
+    </div>
+    <div class="mefimessages" style="margin-top:3px;">welcome back <a href="//www.metafilter.com/user/451" target="_self" style="font-weight:bold;">JasonSch</a> | <a href="//www.metafilter.com/contribute/messages.mefi" title="MeFi Mail: Inbox" target="_self"><i class="mmicon"></i></a> | <a href="/index.cfm?delcookie=yes&_rnd=1378DE35D5DAAD5E826DAC67DE8ECE6B" title="Log out of MeFi?" target="_self" class="signout">logout</a></div>
+    <br clear="all">
+    <a name="content"></a>
+
+    <div id="page">
+        <script>
+var subd="irl";
+function incFav(d){var d=d.replace(/^\s*|\s*$/g,""),f=d.split(":"),d=f[0],c=f[1],e=f[2],a=f[3],b=f[4],k=f[5],h=f[6],i=f[8],f=f[7],j=k==1?"You already made this a favorite.":"This is not a favorite.",g=document.getElementById("favmsg"+a+d);e==j&&(g.hasChildNodes()&&g.removeChild(g.firstChild),g.appendChild(document.createTextNode(" "+e)));if(e==parseInt(e)){if(a==1||a==3||a==5||a==7||a==8||a==10||a==19||a==21||a==23){for(ddiv=document.getElementById("fav"+a+d);ddiv.hasChildNodes();)ddiv.removeChild(ddiv.firstChild);c=document.createElement("a");k==1?(c.innerHTML="add to favorites",b="addFav("+d+","+d+","+a+","+b+",'"+h+"',"+i+");return false;"):(c.innerHTML="remove from favorites",b="delFav("+d+","+d+","+a+","+b+",'"+h+"',"+i+");return false;");c.id="newlink"+a+d;c.href="#";c.style.fontWeight="normal";ddiv.appendChild(document.createTextNode("["));ddiv.appendChild(c);ddiv.appendChild(document.createTextNode("]"));document.getElementById("newlink"+a+d).onclick=new Function(b)}else if(a==2||a==4||a==6||a==9||a==13||a==20||a==22||a==24)pmlink=document.getElementById("plusminus"+a+d),k==1?(pmlink.innerHTML="+",pmlink.title="Save this comment as a favorite",b="addFav("+d+","+c+","+a+","+b+",'"+h+"',"+i+");return false;"):(pmlink.innerHTML="&minus;",pmlink.title="Remove this comment as a favorite",b="delFav("+d+","+c+","+a+","+b+",'"+h+"',"+i+");return false;"),pmlink.onclick=new Function(b);b=document.getElementById("favcnt"+a+d);if(a==1||a==3||a==5||a==7||a==8||a==10||a==19||a==21||a==23){if(b.hasChildNodes()?b.removeChild(b.lastChild):b.appendChild(document.createTextNode(" ")),e>0)c=document.createElement("a"),c.innerHTML=e+" user",e>1&&(c.innerHTML+="s"),c.innerHTML+=" marked this as a favorite",c.href="/favorited/"+a+"/"+d,c.style.fontWeight="normal",c.title=e+" user",e>1&&(c.title+="s"),c.title+=" marked this as a favorite",b.appendChild(c)}else if(a==2||a==4||a==6||a==9||a==13||a==20||a==22||a==24){if(b.hasChildNodes())for(;b.firstChild;)b.removeChild(b.firstChild);else b.appendChild(document.createTextNode(" "));if(e>0&&f<2){h="";j=" favorite";e>1&&(h="s");j+=h;var l=j;i==1&&(l="");c=document.createElement("a");c.innerHTML=f==0?e+l:"has favorites";c.href="/favorited/"+a+"/"+d;c.style.fontWeight="normal";c.title=e+" user"+h;c.title+=" marked this as a favorite";i==1&&f==0&&b.appendChild(document.createTextNode(j));b.appendChild(document.createTextNode(" "));b.insertBefore(c,b.firstChild)}else b.hasChildNodes()&&b.removeChild(b.firstChild)}g.hasChildNodes()&&g.removeChild(g.firstChild);g.appendChild(document.createTextNode(k==1?" Favorite removed!":" Favorite added!"))}else g.hasChildNodes()&&g.removeChild(g.firstChild),g.appendChild(document.createTextNode(" "+e))};
+        </script> <div style="float:right;" id="threadside">
+            <div align="right" id="threadsub">
+
+                <div class="tags">
+                    Tags:
+
+
+                    <div id="taglist">
+
+                        <a href="http://irl.metafilter.com/tags/camping" style="font-size:11px; font-weight:normal;text-decoration:underline;" rel="tag">
+                            camping
+                        </a> <br>
+
+                        <a href="http://irl.metafilter.com/tags/campout" style="font-size:11px; font-weight:normal;text-decoration:underline;" rel="tag">
+                            campout
+                        </a> <br>
+
+                        <a href="http://irl.metafilter.com/tags/regional" style="font-size:11px; font-weight:normal;text-decoration:underline;" rel="tag">
+                            regional
+                        </a> <br>
+
+                        <a href="http://irl.metafilter.com/tags/OlympicPeninsula" style="font-size:11px; font-weight:normal;text-decoration:underline;" rel="tag">
+                            OlympicPeninsula
+                        </a> <br>
+
+                        <a href="http://irl.metafilter.com/tags/campfire" style="font-size:11px; font-weight:normal;text-decoration:underline;" rel="tag">
+                            campfire
+                        </a> <br>
+
+                        <a href="http://irl.metafilter.com/tags/coast" style="font-size:11px; font-weight:normal;text-decoration:underline;" rel="tag">
+                            coast
+                        </a> <br>
+
+                        <a href="http://irl.metafilter.com/tags/mountains" style="font-size:11px; font-weight:normal;text-decoration:underline;" rel="tag">
+                            mountains
+                        </a> <br>
+
+                        <a href="http://irl.metafilter.com/tags/ClassicPNW" style="font-size:11px; font-weight:normal;text-decoration:underline;" rel="tag">
+                            ClassicPNW
+                        </a> <br>
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="sidebar-attending" id="attending">
+                    <h2 class="sidebar-attending-title">Attending <span class="sidebar-attending-count">(1)</span></h2>
+
+                    <span class="smallcopy">
+
+                        <a href="http://www.metafilter.com/user/78020" target="_self">Greg_Ace</a><br>
+
+                    </span>
+
+                </div>
+
+                <div class="sidebar-attending" id="maybe">
+                    <h2 class="sidebar-attending-title">Maybe <span class="sidebar-attending-count">(10)</span></h2>
+
+                    <span class="smallcopy">
+
+                        <a href="http://www.metafilter.com/user/151308" target="_self">Radiophonic Oddity</a><br>
+
+                        <a href="http://www.metafilter.com/user/46137" target="_self">Secretariat</a><br>
+
+                        <a href="http://www.metafilter.com/user/128858" target="_self">corb</a><br>
+
+                        <a href="http://www.metafilter.com/user/22111" target="_self">kalimac</a><br>
+
+                        <a href="http://www.metafilter.com/user/52511" target="_self">churl</a><br>
+
+                        <a href="http://www.metafilter.com/user/31323" target="_self">janell</a><br>
+
+                        <a href="http://www.metafilter.com/user/89156" target="_self">DingoMutt</a><span class="sidebar-attending-guestcount">  (+1)</span><br>
+
+                        <a href="http://www.metafilter.com/user/12347" target="_self">bendy</a><br>
+
+                        <a href="http://www.metafilter.com/user/11838" target="_self">Kat Allison</a><br>
+
+                    </span>
+
+                </div>
+
+
+                <script language='JavaScript' type='text/javascript'>
+	    function setAttending(status) {
+	        var thisid = 'maybe';
+	        if (status) { thisid = 'attending'; }
+			jQuery.get('/attending.cfm?lid=4133&s='+status,function(data){
+				jQuery('#'+thisid).html(data);
+			});
+	    }
+		function guestForm(b) {
+			if (b) {
+				jQuery('#guestform').css('display','block');
+			}
+			else {
+				jQuery('#guestform').css('display','none');
+			}
+		}
+	    function setGuests(n) {
+			jQuery.ajax({
+			  type:'POST',
+			  dataType:"html",
+			  url:'/contribute/guests.cfm',
+			  data:'lid=4133&token=76B7EE27C1F0DD24EE373C6B5C8DE321&n='+n,
+			  success:function(data){
+				jQuery('#guests').html(data);
+				setAttending(1);
+				setAttending(0);
+			  }
+			});
+	    }
+	    function attend(status) {
+			jQuery.ajax({
+			  type:'POST',
+			  dataType:"html",
+			  url:'/contribute/attend.cfm',
+			  data:'lid=4133&token=76B7EE27C1F0DD24EE373C6B5C8DE321&s='+status,
+			  success:function(data){
+				jQuery('#attend').html(data);
+				setAttending(1);
+				setAttending(0);
+				guestForm(1);
+			  }
+			});
+	    }
+	    function leave() {
+			jQuery.ajax({
+			  type:'POST',
+			  dataType:"html",
+			  url:'/contribute/leave.cfm',
+			  data:'lid=4133&token=76B7EE27C1F0DD24EE373C6B5C8DE321',
+			  success:function(data){
+				jQuery('#attend').html(data);
+				setAttending(1);
+				setAttending(0);
+				guestForm(0);
+			  }
+			});
+	    }
+                </script>
+
+                <br>
+                <div align="right" style="margin-top:20px;">
+                    <div class="sidebar-attending-form">
+                        <form style="margin:0;padding:0;">
+                            <div style="margin-bottom:7px;">Joining Us?</div>
+                            <div id="attend">
+
+                                <input type="radio" name="joining" value="1" onclick="attend(1);" /> Yes<br />
+                                <input type="radio" name="joining" value="0" onclick="attend(0);" /> Maybe
+
+                            </div>
+                        </form>
+                    </div>
+
+
+
+                    <div id="guestform" class="sidebar-attending-form" style="display:none;">
+                        <form style="margin:0;padding:0;">
+                            <div style="margin-bottom:7px;">Guests?</div>
+                            <div id="guests">
+                                <select name="plus" style="background:#eee;" onChange="setGuests(this.options[this.selectedIndex].value);">
+                                    <option value="0" selected="selected">No Guests</option>
+                                    <option value="1">1 Guest</option>
+                                    <option value="2">2 Guests</option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+
+                <div class="sidebar-attending" id="sharelinks" style="background:none;">
+                    Share<br>
+                    <a class="shareicon twitter" id="tshare" href="http://twitter.com/intent/tweet?text=MeFi+IRL:+Spring+2019+OR-WA+Regional+Canpout+http://mefi.us/i/4133" target="_blank">Twitter</a><br>
+                    <a class="shareicon facebook" id="fbshare" href="http://www.facebook.com/sharer.php?u=http://irl.metafilter.com/4133/Spring-2019-OR-WA-Regional-Canpout" target="_blank">Facebook</a>
+                </div>
+
+            </div>
+        </div>
+        <div id="breadcrumb">
+            <a href="/" target="_self">Home</a> &gt;
+
+
+
+            <a href="/go/us/" target="_self">United States</a> &gt; <a href="/go/us/wa" target="_self">Washington</a> &gt; <a href="/go/us/wa/port-angeles" target="_self">Port Angeles</a>
+        </div>
+
+        <h1 class="posttitle">
+            Spring 2019 OR-WA Regional Canpout<br>
+            <span class="smallcopy">posted January 13, 2019 <span>7:40 PM</span> &nbsp; <a href="http://irl.metafilter.com/4133/Spring-2019-OR-WA-Regional-Canpout/rss"><i class="feedicon"></i></a> <a href="http://irl.metafilter.com/4133/Spring-2019-OR-WA-Regional-Canpout/rss">RSS</a>
+        </h1>
+
+
+
+
+
+        <div class="copy">
+            In the depths of Pacific Northwest winter weather, naturally my mind wanders to happy memories of our region's past outdoor excursions.  This year I was thinking about Washington's Olympic coast.
+
+            This post is in All Ideas Welcome status at the moment, so let's have a discussion on where to go!
+            <div style="border-top:1px dotted #777;margin-top:6px;padding-top:6px;margin-right:145px;" class="miseperator">
+                This <a rel="nofollow" href="https://www.google.com/maps/search/campground+-national/@47.8431793,-124.5101837,10z/data=!4m4!2m3!5m1!4e9!6e1!5m1!1e4?hl=en">Google Maps link</a> shows a few highly-rated non-National Park (taking the government shutdown into consideration) campgrounds to get the ball rolling.  I'm completely unfamiliar with this corner of the big wide world, so anyone who's had camping experiences in this area is encouraged to speak out.
+            </div>
+
+            <span class="smallcopy postbyline">
+                posted by <a href="http://www.metafilter.com/user/78020" target="_self">Greg_Ace</a> to <a href="http://irl.metafilter.com/proposed" target="_self">Proposed</a>  (10 comments total)
+
+                [<a href="http://www.metafilter.com/javascript-required.mefi" onclick="javascript:add_to_ra(4133,'76B7EE27C1F0DD24EE373C6B5C8DE321');return false;" style="font-weight:normal;" target="_self" title="Add post to Recent Activity" id="addra">add to activity</a>]<span id="addramsg"></span>
+
+                <span id="fav194133">[<a href="http://www.metafilter.com/javascript-required.mefi" onclick="javascript:addFav(4133,4133,19,78020,'76B7EE27C1F0DD24EE373C6B5C8DE321');return false;" style="font-weight:normal;" target="_self" title="Save this post as a favorite">add to favorites</a>]</span><span id="favmsg194133"></span>
+
+
+                <span id="favcnt194133"><a href="http://irl.metafilter.com/favorited/19/4133" style="font-weight:normal;" target="_self">1 user marked this as a favorite</a></span>
+                <span id="flag194133">[<a href="http://www.metafilter.com/javascript-required.mefi" onclick="flagpost(4133,4133,19);return false;" style="font-weight:normal;" target="_self" title="Flag this post" class="flag">!</a>]</span>
+            </span>
+        </div><br>
+
+
+        <a name="74827"></a>
+        <div class="comments ">
+            Time-wise I'm guessing late June, but any information about the typical calendar period between &quot;it's beginning to be Mostly Sunny&quot; and &quot;daily temperatures are starting to get into the upper 70's&quot; is helpful!<br>
+            <span class="smallcopy">
+                posted by <a href="http://www.metafilter.com/user/78020" target="_self">Greg_Ace</a> at <a href="/4133/Spring-2019-OR-WA-Regional-Canpout#74827" target="_self">8:00 PM</a>  on January 13
+                <span id="fav2074827">[<span id="favcnt2074827"></span><a href="http://www.metafilter.com/javascript-required.mefi" id="plusminus2074827" onclick="javascript:addFav(74827,4133,20,78020,'76B7EE27C1F0DD24EE373C6B5C8DE321',0);return false;" target="_self" title="Save this comment as a favorite">+</a>]<span id="favmsg2074827"></span></span>
+                <span id="flag2074827">[<a href="http://www.metafilter.com/javascript-required.mefi" onclick="flagpost(74827,4133,20);return false;" style="font-weight:normal;" target="_self" title="Flag this post" class="flag">!</a>]</span>
+            </span>
+        </div><br><br>
+
+        <a name="74835"></a>
+        <div class="comments ">
+            I am interested though dear god I hope we’re not still shutdown in spring,<br>
+            <span class="smallcopy">
+                posted by <a href="http://www.metafilter.com/user/128858" target="_self">corb</a> at <a href="/4133/Spring-2019-OR-WA-Regional-Canpout#74835" target="_self">9:04 AM</a>  on January 14
+                <span id="fav2074835">[<span id="favcnt2074835"></span><a href="http://www.metafilter.com/javascript-required.mefi" id="plusminus2074835" onclick="javascript:addFav(74835,4133,20,128858,'76B7EE27C1F0DD24EE373C6B5C8DE321',0);return false;" target="_self" title="Save this comment as a favorite">+</a>]<span id="favmsg2074835"></span></span>
+                <span id="flag2074835">[<a href="http://www.metafilter.com/javascript-required.mefi" onclick="flagpost(74835,4133,20);return false;" style="font-weight:normal;" target="_self" title="Flag this post" class="flag">!</a>]</span>
+            </span>
+        </div><br><br>
+
+        <a name="74837"></a>
+        <div class="comments ">
+            I am also very interested! I don't know the area very well, but if we become desperate for local knowledge, one of my co-workers camps extensively and would happily give advice.<br>
+            <span class="smallcopy">
+                posted by <a href="http://www.metafilter.com/user/22111" target="_self">kalimac</a> at <a href="/4133/Spring-2019-OR-WA-Regional-Canpout#74837" target="_self">9:57 AM</a>  on January 14
+                <span id="fav2074837">[<span id="favcnt2074837"></span><a href="http://www.metafilter.com/javascript-required.mefi" id="plusminus2074837" onclick="javascript:addFav(74837,4133,20,22111,'76B7EE27C1F0DD24EE373C6B5C8DE321',0);return false;" target="_self" title="Save this comment as a favorite">+</a>]<span id="favmsg2074837"></span></span>
+                <span id="flag2074837">[<a href="http://www.metafilter.com/javascript-required.mefi" onclick="flagpost(74837,4133,20);return false;" style="font-weight:normal;" target="_self" title="Flag this post" class="flag">!</a>]</span>
+            </span>
+        </div><br><br>
+
+        <a name="74839"></a>
+        <div class="comments ">
+            I think we also have to consider *mud* as a factor for spring camping in the Olympics. But I'm game!<br>
+            <span class="smallcopy">
+                posted by <a href="http://www.metafilter.com/user/31323" target="_self">janell</a> at <a href="/4133/Spring-2019-OR-WA-Regional-Canpout#74839" target="_self">1:46 PM</a>  on January 14
+                <span id="fav2074839">[<span id="favcnt2074839"><a href="/favorited/20/74839" style="font-weight:normal;" title="1 user marked this as favorite">1 favorite</a> </span><a href="http://www.metafilter.com/javascript-required.mefi" id="plusminus2074839" onclick="javascript:addFav(74839,4133,20,31323,'76B7EE27C1F0DD24EE373C6B5C8DE321',0);return false;" target="_self" title="Save this comment as a favorite">+</a>]<span id="favmsg2074839"></span></span>
+                <span id="flag2074839">[<a href="http://www.metafilter.com/javascript-required.mefi" onclick="flagpost(74839,4133,20);return false;" style="font-weight:normal;" target="_self" title="Flag this post" class="flag">!</a>]</span>
+            </span>
+        </div><br><br>
+
+        <a name="74840"></a>
+        <div class="comments ">
+            That's something I hadn't considered.  Would camping in that area work better in the fall (or more accurately, in the period where summer temperatures are past but the rainy season hasn't started)?  Is there such a thing as a not-rainy-but-not-hot period in that area?<br>
+            <span class="smallcopy">
+                posted by <a href="http://www.metafilter.com/user/78020" target="_self">Greg_Ace</a> at <a href="/4133/Spring-2019-OR-WA-Regional-Canpout#74840" target="_self">1:54 PM</a>  on January 14
+                <span id="fav2074840">[<span id="favcnt2074840"></span><a href="http://www.metafilter.com/javascript-required.mefi" id="plusminus2074840" onclick="javascript:addFav(74840,4133,20,78020,'76B7EE27C1F0DD24EE373C6B5C8DE321',0);return false;" target="_self" title="Save this comment as a favorite">+</a>]<span id="favmsg2074840"></span></span>
+                <span id="flag2074840">[<a href="http://www.metafilter.com/javascript-required.mefi" onclick="flagpost(74840,4133,20);return false;" style="font-weight:normal;" target="_self" title="Flag this post" class="flag">!</a>]</span>
+            </span>
+        </div><br><br>
+
+        <a name="74843"></a>
+        <div class="comments ">
+            I am in! I live here now and I can do this! So anyway I know absolutely nothing about the area, the weather, the campsites, etc, but name a date and place within 4 hours of Astoria  and I’ll be there with a truck &amp; tiny camper. Even got an extra, comfy, futon bed in the truck. In related news, any mefites dwelling in or visiting the north coast want to grab a beverage, HMU.<br>
+            <span class="smallcopy">
+                posted by <a href="http://www.metafilter.com/user/17735" target="_self">mygothlaundry</a> at <a href="/4133/Spring-2019-OR-WA-Regional-Canpout#74843" target="_self">7:32 PM</a>  on January 14
+                <span id="fav2074843">[<span id="favcnt2074843"><a href="/favorited/20/74843" style="font-weight:normal;" title="2 users marked this as favorite">2 favorites</a> </span><a href="http://www.metafilter.com/javascript-required.mefi" id="plusminus2074843" onclick="javascript:addFav(74843,4133,20,17735,'76B7EE27C1F0DD24EE373C6B5C8DE321',0);return false;" target="_self" title="Save this comment as a favorite">+</a>]<span id="favmsg2074843"></span></span>
+                <span id="flag2074843">[<a href="http://www.metafilter.com/javascript-required.mefi" onclick="flagpost(74843,4133,20);return false;" style="font-weight:normal;" target="_self" title="Flag this post" class="flag">!</a>]</span>
+            </span>
+        </div><br><br>
+
+        <a name="74845"></a>
+        <div class="comments ">
+            I'll be there even if it's only to have another shot at making/eating &quot;Dutch oven lasagna with twice the cheese.&quot;<br>
+            <span class="smallcopy">
+                posted by <a href="http://www.metafilter.com/user/12347" target="_self">bendy</a> at <a href="/4133/Spring-2019-OR-WA-Regional-Canpout#74845" target="_self">2:59 AM</a>  on January 15
+                <span id="fav2074845">[<span id="favcnt2074845"><a href="/favorited/20/74845" style="font-weight:normal;" title="2 users marked this as favorite">2 favorites</a> </span><a href="http://www.metafilter.com/javascript-required.mefi" id="plusminus2074845" onclick="javascript:addFav(74845,4133,20,12347,'76B7EE27C1F0DD24EE373C6B5C8DE321',0);return false;" target="_self" title="Save this comment as a favorite">+</a>]<span id="favmsg2074845"></span></span>
+                <span id="flag2074845">[<a href="http://www.metafilter.com/javascript-required.mefi" onclick="flagpost(74845,4133,20);return false;" style="font-weight:normal;" target="_self" title="Flag this post" class="flag">!</a>]</span>
+            </span>
+        </div><br><br>
+
+        <a name="74849"></a>
+        <div class="comments ">
+            It's good to have goals in life!<br>
+            <span class="smallcopy">
+                posted by <a href="http://www.metafilter.com/user/78020" target="_self">Greg_Ace</a> at <a href="/4133/Spring-2019-OR-WA-Regional-Canpout#74849" target="_self">8:13 AM</a>  on January 15
+                <span id="fav2074849">[<span id="favcnt2074849"></span><a href="http://www.metafilter.com/javascript-required.mefi" id="plusminus2074849" onclick="javascript:addFav(74849,4133,20,78020,'76B7EE27C1F0DD24EE373C6B5C8DE321',0);return false;" target="_self" title="Save this comment as a favorite">+</a>]<span id="favmsg2074849"></span></span>
+                <span id="flag2074849">[<a href="http://www.metafilter.com/javascript-required.mefi" onclick="flagpost(74849,4133,20);return false;" style="font-weight:normal;" target="_self" title="Flag this post" class="flag">!</a>]</span>
+            </span>
+        </div><br><br>
+
+        <a name="74870"></a>
+        <div class="comments ">
+            Come to Whidbey and see me and maxwelton and surlyben and... I think that's it<br>
+            <span class="smallcopy">
+                posted by <a href="http://www.metafilter.com/user/85168" target="_self">The otter lady</a> at <a href="/4133/Spring-2019-OR-WA-Regional-Canpout#74870" target="_self">6:23 PM</a>  on January 16
+                <span id="fav2074870">[<span id="favcnt2074870"><a href="/favorited/20/74870" style="font-weight:normal;" title="1 user marked this as favorite">1 favorite</a> </span><a href="http://www.metafilter.com/javascript-required.mefi" id="plusminus2074870" onclick="javascript:addFav(74870,4133,20,85168,'76B7EE27C1F0DD24EE373C6B5C8DE321',0);return false;" target="_self" title="Save this comment as a favorite">+</a>]<span id="favmsg2074870"></span></span>
+                <span id="flag2074870">[<a href="http://www.metafilter.com/javascript-required.mefi" onclick="flagpost(74870,4133,20);return false;" style="font-weight:normal;" target="_self" title="Flag this post" class="flag">!</a>]</span>
+            </span>
+        </div><br><br>
+
+        <a name="74872"></a>
+        <div class="comments ">
+            I have to say, it certainly <a href="https://www.google.com/search?q=Whidbey+island+camping&num=50&source=lnms&tbm=isch&sa=X&ved=0ahUKEwi1m4Pe9PPfAhU4HTQIHV7qAYcQ_AUIDygC&biw=1645&bih=928">looks inviting</a>!  And it's 4 hours from Portland (though that's mostly I-5, so not necessarily a scenic drive).  Thoughts, anyone?  Are there, like, hiking trails and such?<br>
+            <span class="smallcopy">
+                posted by <a href="http://www.metafilter.com/user/78020" target="_self">Greg_Ace</a> at <a href="/4133/Spring-2019-OR-WA-Regional-Canpout#74872" target="_self">7:53 PM</a>  on January 16
+                <span id="fav2074872">[<span id="favcnt2074872"></span><a href="http://www.metafilter.com/javascript-required.mefi" id="plusminus2074872" onclick="javascript:addFav(74872,4133,20,78020,'76B7EE27C1F0DD24EE373C6B5C8DE321',0);return false;" target="_self" title="Save this comment as a favorite">+</a>]<span id="favmsg2074872"></span></span>
+                <span id="flag2074872">[<a href="http://www.metafilter.com/javascript-required.mefi" onclick="flagpost(74872,4133,20);return false;" style="font-weight:normal;" target="_self" title="Flag this post" class="flag">!</a>]</span>
+            </span>
+        </div><br><br>
+
+
+
+        <br>
+
+
+        <a name="commentpreview"></a>
+        <form name="mefi" action="/contribute/post_comment_preview.cfm#commentpreview" method="POST" target="_self" id="commentform">
+            <input type="hidden" name="token" value="76B7EE27C1F0DD24EE373C6B5C8DE321" />
+            <table border="0" width="730" id="commenttable">
+
+                <tr>
+                    <td rowspan="5" width="50">&nbsp;</td>
+                    <td align="right" valign="top" nowrap><span class="smallcopy">Posting as:</span></td>
+                    <td valign="top"><span class="smallcopy"><a href="http://www.metafilter.com/user/451" target="_self" tabindex="0">JasonSch</a></span></td>
+                </tr>
+                <tr>
+                    <td align="right" valign="top" nowrap="nowrap"><span class="smallcopy">Comment:<div style="font-size:9px;margin-top:8px;"><a href="http://faq.metafilter.com/tags/html" style="font-weight:normal;" target="_self" tabindex="0">(HTML help)</a></div></span></td>
+                    <td valign="top" id="commenttd">
+                        <textarea name="comment" id="comment" cols="60" rows="8" wrap="VIRTUAL" style="width:605px;height:250px;" onfocus="this.style.background='#ddd';" onblur="this.style.background='#ccc';" tabindex="1"></textarea>
+
+                    </td>
+                </tr>
+
+
+                <tr>
+
+                    <td colspan="2" align="right" id="tbtd">
+                        <div style="float:right;">
+                            <div id="toolbar" style="z-index:999;">
+                                <img class="buttons" onmouseover="mouseover(this);" onmouseout="mouseout(this);" onmousedown="mousedown(this);" onmouseup="mouseup(this);" onclick="return pnhEditTextarea('comment','strong')" src="//d217i264rvtnq0.cloudfront.net/images/mefi/bold.gif" title="click to make your text selection bold (or type control-B)" width="16" height="16">
+                                <img class="buttons" onmouseover="mouseover(this);" onmouseout="mouseout(this);" onmousedown="mousedown(this);" onmouseup="mouseup(this);" onclick="return pnhEditTextarea('comment','emphasis')" src="//d217i264rvtnq0.cloudfront.net/images/mefi/italic.gif" title="click to make your text selection italicized (or type control-I)" width="16" height="16">
+                                <img class="buttons" onmouseover="mouseover(this);" onmouseout="mouseout(this);" onmousedown="mousedown(this);" onmouseup="mouseup(this);" onclick="return pnhEditTextarea('comment','a_href')" src="//d217i264rvtnq0.cloudfront.net/images/mefi/link.gif" width=32 height=16 align="middle" title="click to add a link to the selected text (or type control-U)">
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr id="prevRow">
+                    <td>&nbsp;</td>
+                    <td valign="top" class="copy">
+                        <input type="submit" name="post" value="Preview" class="button" tabindex="2" />
+
+                    </td>
+                </tr>
+                <tr id="prevRow2" style="display:none;">
+
+                    <td valign="top" align="right" class="copy" nowrap><span id="lplabel" class="smallcopy">Live Preview:<div style="font-size:9px;margin-top:0px;"><a href="http://www.metafilter.com/contribute/removing-live-preview.mefi" style="font-weight:normal;" target="_self" onclick="return confirm('Are you sure you want to hide Live Preview now?\n\nYou\'ll lose any comment you\'ve started.');" tabindex="0">(Hide)</a></div></span></td>
+
+                    <td id="lpdiv">
+
+                        <div class="comments" id="prevDiv" style="width:592px;margin:0px;padding:6px; padding-bottom:2px; background-color:#4D2A17;border:solid 1px #555;;border-bottom:0px;margin-bottom:0px;">&nbsp;</div>
+                        <div class="comments" id="prevDiv2" style="width:592px;margin:0px;padding:6px; padding-top:0px; background-color:#4D2A17;border:solid 1px #555;;border-top:0px;margin-top:0px;margin-bottom:12px;"></div>
+
+                        <p class="smallcopy" id="commentnote">Note: You're going to see these people in real life.</p>
+
+                        <input type="submit" id="postButton" value="Post Comment" name="post" class="button" style="margin-left:4px;" tabindex="2"> <span class="smallcopy" style="margin-left:6px;margin-right:6px;">OR</span> <input type="submit" value="Preview" name="post" class="button" tabindex="3" id="previewButton">
+                        <input type="hidden" name="link_ID" value="4133">
+                    </td>
+                </tr>
+
+            </table>
+
+
+            <script type="text/javascript">
+function enablePreview() {document.getElementById('previewButton').disabled=false;};
+addEvent(window, 'load', enablePreview);
+function getEl(x){return document.getElementById(x)};getEl("prevRow").style.display='none';getEl("prevRow2").style.display='';getEl("postButton").disabled=true;function prev(){if(getEl("comment").value!=""){getEl("prevDiv2").innerHTML="<span class='smallcopy'>posted by <a href='http://www.metafilter.com/user/451' target='_self'>JasonSch</a> at <a href='#' target='_self'>9:16 PM</a> on January 17</span>"
+getEl("postButton").disabled=false;getEl("prevDiv").innerHTML="<div>"+lpfilter(getEl("comment").value)+"</div>"}else{getEl("prevDiv2").innerHTML="";getEl("prevDiv").innerHTML="&nbsp;";getEl("postButton").disabled=true;}}
+getEl("comment").onkeyup=prev;getEl("comment").onmousemove=prev;if(getEl("comment").value!=""){prev()};
+function lpfilter(a){for(var f="",c=[],j="",a=a.replace(/&#(.*);/g,""),a=a.replace(/&(?!\w+;)/g,"&amp;"),a=a.replace(/<3/,"&lt;3"),a=a.replace(/< /g,"&lt; ");a!="";){var e=/(<)(\/?)(\w*)([^>]*)(>?)|>/m.exec(a);if(e){var d=a.substr(0,e.index);c.join(",").match(/\bpre\b/)||(d=d.replace(/(\r?\n)/g,"<br>$1"));f+=d;a=a.substr(e.index);if(e[1]=="<"&&e[5]=="")f+="&lt;",a=a.substr(1);else if(e[0]==">")f+="&gt;",a=a.substr(1);else{var d=e[2],g=e[3].toLowerCase();if(!g.match(/^(applet|base|bgsound|big|body|button|div|embed|fieldset|font|form|frame|frameset|h1|h2|h3|h4|h5|h6|hr|html|iframe|image|img|input|isindex|layer|legend|link|mark|marquee|meta|object|p|param|plaintext|script|select|span|style|table|td|textarea|tr)$/)||d=="/"){var h="";if(d==""){g!="br"&&c.push(g);for(var k=RegExp("(\\w+)(\\s*=\\s*(\"([^\"]*)\"|'([^']*)'|([^\\s'\"]*)))?","g"),b;b=k.exec(e[4]);){var i=b[1].toLowerCase();(b=b[4]||b[5]||b[6])&&b.match(/\n/)&&(b="");b&&(b=b.replace(/^javascript:/,"[filtered]"));if(i=="title"&&g.match(/^(a|abbr|acronym)$/)||i=="href"&&g=="a")h+=" "+i,h+=b.match(/"/)?"='"+b+"'":'="'+b+'"'}}else{for(;c.length>0&&c[c.length-1]!=g;)j+="</"+c.pop()+">";c.pop()}f+="<"+d+g+h+">"}a=a.substr(e[0].length)}}else d=a,c.join(",").match(/\bpre\b/)||(d=d.replace(/\r?\n/g,"<br>\n")),f+=d,a=""}f+=j;c=c.reverse();for(a=0;a<c.length;++a)f+="</"+c[a]+">";return f=f.replace(/(<br\/?>)?(\r?\n)?(<br\/?>)?(\r?\n)?(<\/?(blockquote|li|ol|pre|ul)>\n?)(<br\/?>)?(\r?\n)?(<br\/?>)?(\r?\n)?/g,"$2$4$5$8$10")};
+            </script>
+
+        </form>
+
+    </div>
+
+
+
+
+    <script src="//maps.google.com/maps?file=api&amp;v=2&amp;key=AIzaSyA_JnPToEkbgQYgxHKqdKV5B5q0b6X9LLY" type="text/javascript"></script>
+    <script src="//d217i264rvtnq0.cloudfront.net/scripts/irl/pagemap-062013-min.js" type="text/javascript"></script>
+
+
+    <br clear="all">
+    <div id="footer">
+        <div style="width:20%;float:left;">
+            <div class="footpad">
+                <p><strong>Features</strong></p>
+                - <a href="/contribute/post.cfm" target="_self">New Event</a><br>
+                - <a href="http://www.metafilter.com/contribute/customize.cfm" target="_self">Preferences</a><br>
+                - <a href="http://www.metafilter.com/contribute/activity/" target="_self">Recent Activity</a><br>
+                - <a href="http://www.metafilter.com/favorites/451" target="_self">Favorites</a><br>
+                - <a href="http://www.metafilter.com/usercontacts/451" target="_self">My Contacts</a><br>
+                - <a href="http://www.metafilter.com/user/451" target="_self">My Profile</a> | <a href="/index.cfm?delcookie=yes&_rnd=A21032759AF345B471B858AF3620E8F3" target="_self">Logout</a>
+            </div>
+        </div>
+        <div style="width:20%;float:left;">
+            <div class="footpad">
+                <p><strong>Links</strong></p>
+                - <a href="/" target="_self">Home</a><br>
+                - <a href="//www.metafilter.com/contribute/search.mefi" target="_self">Search</a><br> - <a href="/archive.mefi" target="_self">Archives</a><br> - <a href="/tags/" target="_self">Tags</a><br>
+                - <a href="//www.metafilter.com/about.mefi" target="_self">About</a>
+                <br>- <a href="http://mefiwiki.com">MeFi Wiki</a>
+            </div>
+        </div>
+        <div style="width:20%;float:left;">
+            <div class="footpad">
+                <p><strong>Sites</strong></p>
+                - <a href="http://feeds.feedburner.com/Metafilter"><i class="feedicon"></i></a> <a href="http://www.metafilter.com/" target="_self">MetaFilter</a><br>
+                - <a href="http://feeds.feedburner.com/AskMetafilter"><i class="feedicon"></i></a> <a href="http://ask.metafilter.com/" target="_self">AskMeFi</a><br>
+                - <a href="http://feeds.feedburner.com/MeFi/FanFare"><i class="feedicon"></i></a> <a href="http://fanfare.metafilter.com/" target="_self">FanFare</a><br>
+                - <a href="http://feeds.feedburner.com/mefi/Projects"><i class="feedicon"></i></a> <a href="http://projects.metafilter.com/" target="_self">Projects</a><br>
+                - <a href="http://feeds.feedburner.com/mefi/Music"><i class="feedicon"></i></a> <a href="http://music.metafilter.com/" target="_self">Music</a><br>
+                - <a href="http://feeds.feedburner.com/MeFi/Jobs"><i class="feedicon"></i></a> <a href="http://jobs.metafilter.com/" target="_self">Jobs</a><br>
+                - <a href="http://feeds.feedburner.com/MeFiIRL"><i class="feedicon"></i></a> <a href="http://irl.metafilter.com/" target="_self">IRL</a><br>
+                - <a href="http://feeds.feedburner.com/MeFi/MetaTalk"><i class="feedicon"></i></a> <a href="http://metatalk.metafilter.com/" target="_self">MetaTalk</a>
+            </div>
+        </div>
+        <div style="width:20%;float:left;">
+            <div class="footpad">
+                <p style="margin-top:30px;">Join 5,931 readers in helping <a href="https://login.metafilter.com/funding.mefi" target="_self">fund MetaFilter</a></p>
+                <p style="margin-top:15px;"><a href="https://www.metafilter.com/contact/">Contact Us</a></p>
+            </div>
+        </div>
+        <div style="width:20%;float:left;">
+            <div class="footpad">
+                <form action="//www.metafilter.com/contribute/search.mefi" method="GET" target="_self" style="margin-top:15px;padding:0px;margin-bottom:15px;"><input type=hidden name=site value=""><input type="text" name="q" size="34" style="width:100px;"> <input type="submit" value="Search"></form>
+                <span class="fineprint">
+                    &copy; 1999-2019 <a href="http://www.metafilter.net/" target="_self">MetaFilter Network Inc.</a><br>
+                    All posts are &copy; their original authors.
+                </span><br><br>
+                <span class="fineprint"><a href="http://faq.metafilter.com/" target="_self">FAQ</a> | <a href="http://www.metafilter.com/contact/" target="_self">Contact</a> | &#9731;<br></span>
+            </div>
+        </div>
+        <br clear="all">
+    </div>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="//d217i264rvtnq0.cloudfront.net/scripts/mefi/members070215b-min.js"></script>
+    <script type="text/javascript">
+var hash = window.location.hash.substr(1);
+$(function(){
+$("input[type=submit]").bind("click",function(){$(this).attr("was_clicked","Y")});$("#commentform").submit(function(){var a=$('input[was_clicked="Y"]');$("<input>").attr({type:"hidden",name:a.attr("name"),value:a.val()}).appendTo("#commentform");a.attr("disabled","disabled").css("background-color","silver")});$('.ipb').each(function(){$(this).mousedown(function(e){e.preventDefault();});});
+$.ctrl=function(d,e,c){$("#comment").keydown(function(a){c||(c=[]);if((a.keyCode||a.which)==d.charCodeAt(0)&&(a.metaKey||a.ctrlKey))return a.preventDefault(),e.apply(this,c),!1});$("#comment").keypress(function(a){var b=a.keyCode||a.which;if((b==21||b==98||b==105||b==117)&&a.ctrlKey)return a.preventDefault(),!1})};
+$.ctrl('B', function() {pnhEditTextarea('comment','strong');});
+$.ctrl('I', function() {pnhEditTextarea('comment','emphasis');});
+$.ctrl('U', function() {pnhEditTextarea('comment','a_href');});
+init_addtags();
+init_editing();
+target(hash);
+$(window).hashchange(function(){hash=window.location.hash.substr(1);target(location.hash.substr(1));})
+$(window).resize(function(){hash=window.location.hash.substr(1);target(location.hash.substr(1));});
+});
+    </script>
+    <script type="text/javascript">var _gaq=_gaq||[];_gaq.push(["_setAccount","UA-251263-12"]);_gaq.push(["_setDomainName","metafilter.com"]);_gaq.push(["_setAllowHash",!1]);_gaq.push(["_setCustomVar",1,"User Type","member",1]);_gaq.push(["_trackPageview"]);(function(){var a=document.createElement("script");a.type="text/javascript";a.async=!0;a.src=("https:"==document.location.protocol?"https://ssl":"http://www")+".google-analytics.com/ga.js";var b=document.getElementsByTagName("script")[0];b.parentNode.insertBefore(a,b)})();</script>
+    <script type="text/javascript" src="//www.metafilter.com/js/inline-flags.051116.min.js"></script>
+</body>
+</html>

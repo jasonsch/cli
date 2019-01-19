@@ -4,7 +4,7 @@ using System.Net;
 using System.Text.RegularExpressions;
 using Google.Apis.Calendar.v3.Data;
 
-namespace gcal
+namespace gcal.Models
 {
     public class EventInformation
     {

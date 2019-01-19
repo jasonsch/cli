@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using System.Net;
 using Newtonsoft.Json;
+using gcal.Interfaces;
+using gcal.Models;
 
 namespace gcal
 {
-    public class TicketWebFilter
+    public class TicketWebHandler : IUrlEventParser
     {
         private class EventDataPhysicalLocation
         {
@@ -31,23 +32,19 @@ namespace gcal
             public EventDataLocation location;
         }
 
-        private static string GetPageContents(string URL)
-        {
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+        private readonly IUrlDownload PageDownloader;
 
-            using (var client = new WebClient())
-            {
-                client.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705;)");
-                return client.DownloadString(URL);
-            }
+        public TicketWebHandler(IUrlDownload PageDownloader)
+        {
+            this.PageDownloader = PageDownloader;
         }
 
-        public static bool ParseUrl(string EventUrl, List<EventInformation> EventList)
+        public bool ParseEvent(string EventUrl, List<EventInformation> EventList)
         {
             Match match;
             string EventContents;
 
-            EventContents = GetPageContents(EventUrl);
+            EventContents = PageDownloader.GetPageContents(EventUrl);
 
             match = Regex.Match(EventContents, @"<script type=""application/ld\+json"">(.*?)</script>", RegexOptions.Singleline);
             if (match.Success)

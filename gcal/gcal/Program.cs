@@ -9,6 +9,7 @@ using System.Globalization;
 using System.IO;
 using System.Threading;
 using Mono.Options;
+using gcal.Models;
 
 namespace gcal
 {
@@ -93,6 +94,8 @@ Unhandled Exception: System.Net.Http.HttpRequestException: No such host is known
         //
         private static readonly string[] Scopes = { CalendarService.Scope.Calendar };
         private static readonly string ApplicationName = "gcal";
+        private static readonly URLDownloader Downloader = new URLDownloader();
+        private static readonly UrlParserManager UrlParsers = new UrlParserManager(Downloader);
 
         static void PrintUsage(string ErrorMessage = null)
         {
@@ -107,7 +110,6 @@ Unhandled Exception: System.Net.Http.HttpRequestException: No such host is known
             Console.WriteLine("-c, --calendar <calendar name>\tSpecifies the calendar for this event (defaults to users's primary calendar)");
             Console.WriteLine("-d, --description <event description>\tThe description for the calendar event");
             Console.WriteLine("-e, --end <date>\tThe end date of the entry");
-            Console.WriteLine("-f, --facebook <URL>\tA facebook event URL that is parsed for the event info");
             Console.WriteLine("-n, --notification <'email|popup==<time period>'>\tThe type of reminder notification and when to show it.");
             Console.WriteLine("-r, --recurrence <rule>\tA recurrence rule for this event (e.g., 'RRULE:FREQ=DAILY;COUNT=2'). Can be specified multiple times.");
             Console.WriteLine("-s, --start <date>\tThe start date of the entry");
@@ -200,7 +202,6 @@ Unhandled Exception: System.Net.Http.HttpRequestException: No such host is known
             OptionSet options = new OptionSet();
             string CalendarID = "primary";
             EventInformation EventInfo = new EventInformation();
-            string FacebookURL = null;
             string EventUrl = null;
             bool eventAllDay = false;
             List<string> NakedParameters = null;
@@ -235,7 +236,6 @@ Unhandled Exception: System.Net.Http.HttpRequestException: No such host is known
             options.Add("c|calendar=", value => { CalendarID = FindCalendarByName(service, value); if (CalendarID == null) { PrintUsage("Couldn't find specified calendar!"); } FlagsPassed = true; });
             options.Add("d|description=", value => { EventInfo.Description = value; FlagsPassed = true; });
             options.Add("e|end=", value => { EventInfo.SetEndDate(value); FlagsPassed = true; });
-            options.Add("f|facebook=", value => { FacebookURL = value; FlagsPassed = true; });
             options.Add("n|notification=", value => { EventInfo.SetReminderNotification(value); });
             options.Add("r|recurrence=", value => { EventInfo.AddRecurrenceRule(value); });
             options.Add("s|start=", value => { EventInfo.SetStartDate(value); FlagsPassed = true; });
@@ -247,13 +247,9 @@ Unhandled Exception: System.Net.Http.HttpRequestException: No such host is known
 
             if (FlagsPassed)
             {
-                if (!String.IsNullOrEmpty(FacebookURL))
+                if (!String.IsNullOrEmpty(EventUrl))
                 {
-                    HandleFacebookEvent(service, CalendarID, FacebookURL);
-                }
-                else if (!String.IsNullOrEmpty(EventUrl))
-                {
-                    HandleTicketwebEvent(service, CalendarID, EventUrl);
+                    HandleEventURL(service, CalendarID, EventUrl);
                 }
                 else
                 {
@@ -289,29 +285,11 @@ Unhandled Exception: System.Net.Http.HttpRequestException: No such host is known
             }
         }
 
-        private static bool HandleTicketwebEvent(CalendarService service, string CalendarID, string Url)
+        private static bool HandleEventURL(CalendarService service, string CalendarID, string Url)
         {
             List<EventInformation> Events = new List<EventInformation>();
 
-            // TODO -- Both "filters" download the page; we should centralize that code.
-            if (!MetaFilterFilter.ParseUrl(Url, Events) && !TicketWebFilter.ParseUrl(Url, Events))
-            {
-                return false;
-            }
-
-            foreach (var Event in Events)
-            {
-                AddCalendarEvent(service, CalendarID, Event, false);
-            }
-
-            return true;
-        }
-
-        private static bool HandleFacebookEvent(CalendarService service, string CalendarID, string FacebookURL)
-        {
-            List<EventInformation> Events = new List<EventInformation>();
-
-            if (!FacebookFilter.ParseFacebookEvent(FacebookURL, Events))
+            if (!UrlParsers.HandleUrl(Url, Events))
             {
                 return false;
             }

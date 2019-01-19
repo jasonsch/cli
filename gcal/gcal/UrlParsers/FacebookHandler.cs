@@ -1,31 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Net;
 using System.Text.RegularExpressions;
+using gcal.Interfaces;
+using gcal.Models;
 
 namespace gcal
 {
     //
     // TODO -- Use API (https://developers.facebook.com/docs/graph-api/reference/event/#Overview)
     //
-    class FacebookFilter
+    class FacebookHandler : IUrlEventParser
     {
-        private static string GetPageContents(string URL)
-        {
-            /*
-            HttpWebRequest Request = (HttpWebRequest)WebRequest.Create(URL);
-            WebResponse Response;
-            
-            Request.UserAgent = "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705;)";
-            Response = Request.GetResponse();
-            return null;
-            */
+        private readonly IUrlDownload PageDownloader;
 
-            using (var client = new WebClient())
-            {
-                client.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705;)");
-                return client.DownloadString(URL);
-            }
+        public FacebookHandler(IUrlDownload PageDownloader)
+        {
+            this.PageDownloader = PageDownloader;
         }
 
         /*
@@ -45,14 +35,13 @@ namespace gcal
             }
         }
 
-        public static bool ParseFacebookEvent(string EventURL, List<EventInformation> EventList)
+        public bool ParseEvent(string EventURL, List<EventInformation> EventList)
         {
             string EventContents;
             EventInformation EventInfo;
             Match match;
 
-            EventContents = GetPageContents(EventURL);
-
+            EventContents = PageDownloader.GetPageContents(EventURL);
             if (LoginRequired(EventContents))
             {
                 Console.WriteLine("ERROR: {0} is a non-public event and requires login.", EventURL);
@@ -70,7 +59,7 @@ namespace gcal
                     string url;
 
                     url = String.Format("https://www.facebook.com/events/{0}/?event_time_id={1}", match.Groups[1].Value, match.Groups[2].Value);
-                    if (!ParseFacebookEvent(url, EventList))
+                    if (!ParseEvent(url, EventList))
                     {
                         Console.WriteLine("Couldn't parse FB sub-event {0}", url);
                         return false;
