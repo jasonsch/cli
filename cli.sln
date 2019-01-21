@@ -3,15 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gcal", "gcal\gcal.csproj", "{84ED5F54-6537-4C31-9D96-EE18447E103A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "uuid", "uuid\uuid.csproj", "{D3980295-E994-445D-9434-FC08F6488EED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "uuid", "uuid\uuid.csproj", "{D3980295-E994-445D-9434-FC08F6488EED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "uniq", "uniq\uniq.csproj", "{8363D587-023D-492D-BCE6-8D1B5B018C54}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "uniq", "uniq\uniq.csproj", "{8363D587-023D-492D-BCE6-8D1B5B018C54}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "password", "password\password.csproj", "{C4D05F0A-ABF9-43BA-ADE8-A38444182FD6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "password", "password\password.csproj", "{C4D05F0A-ABF9-43BA-ADE8-A38444182FD6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "yas", "yas\yas.csproj", "{8ACDEE48-B898-40FB-814C-9726C2174956}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "yas", "yas\yas.csproj", "{8ACDEE48-B898-40FB-814C-9726C2174956}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "gcal", "gcal", "{13429F8C-9A0C-487F-A0D1-0D8155FB62D9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "gcal", "gcal\gcal\gcal.csproj", "{86FDB2FA-406D-41ED-9A45-61D03C072EAB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "gcal.UnitTests", "gcal\gcal.UnitTests\gcal.UnitTests.csproj", "{04F2F171-2EEF-4A2F-B2B6-90A2FC38CF98}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,10 +23,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{84ED5F54-6537-4C31-9D96-EE18447E103A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{84ED5F54-6537-4C31-9D96-EE18447E103A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{84ED5F54-6537-4C31-9D96-EE18447E103A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{84ED5F54-6537-4C31-9D96-EE18447E103A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D3980295-E994-445D-9434-FC08F6488EED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D3980295-E994-445D-9434-FC08F6488EED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D3980295-E994-445D-9434-FC08F6488EED}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -39,9 +39,21 @@ Global
 		{8ACDEE48-B898-40FB-814C-9726C2174956}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8ACDEE48-B898-40FB-814C-9726C2174956}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8ACDEE48-B898-40FB-814C-9726C2174956}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86FDB2FA-406D-41ED-9A45-61D03C072EAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86FDB2FA-406D-41ED-9A45-61D03C072EAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86FDB2FA-406D-41ED-9A45-61D03C072EAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86FDB2FA-406D-41ED-9A45-61D03C072EAB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04F2F171-2EEF-4A2F-B2B6-90A2FC38CF98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04F2F171-2EEF-4A2F-B2B6-90A2FC38CF98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04F2F171-2EEF-4A2F-B2B6-90A2FC38CF98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04F2F171-2EEF-4A2F-B2B6-90A2FC38CF98}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{86FDB2FA-406D-41ED-9A45-61D03C072EAB} = {13429F8C-9A0C-487F-A0D1-0D8155FB62D9}
+		{04F2F171-2EEF-4A2F-B2B6-90A2FC38CF98} = {13429F8C-9A0C-487F-A0D1-0D8155FB62D9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3A6DC405-1A63-454F-8DC2-D0D804A41E00}
