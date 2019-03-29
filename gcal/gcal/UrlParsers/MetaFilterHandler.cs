@@ -15,6 +15,11 @@ namespace gcal
             this.PageDownloader = PageDownloader;
         }
 
+        private static bool IsMetafilterUrl(string Url)
+        {
+            return Regex.IsMatch(Url, "^https://irl.metafilter.com/");
+        }
+
         public bool ParseEvent(string EventURL, List<EventInformation> EventList)
         {
             string EventContents;

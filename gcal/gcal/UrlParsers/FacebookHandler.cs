@@ -35,11 +35,21 @@ namespace gcal
             }
         }
 
+        private static bool IsFacebookUrl(string Url)
+        {
+            return Regex.IsMatch(Url, "^https://www.facebook.com/events/");
+        }
+
         public bool ParseEvent(string EventURL, List<EventInformation> EventList)
         {
             string EventContents;
             EventInformation EventInfo;
             Match match;
+
+            if (!IsFacebookUrl(EventURL))
+            {
+                return false;
+            }
 
             EventContents = PageDownloader.GetPageContents(EventURL);
             if (LoginRequired(EventContents))

@@ -20,13 +20,13 @@ namespace password
             OptionSet options = new OptionSet();
             int PasswordMinLength = DefaultPasswordLength;
             int PasswordMaxLength = DefaultPasswordLength;
-            GeneratorType Generators = GeneratorType.None;
+            List<GeneratorType> Generators = new List<GeneratorType>();
             List<string> RemainingParameters;
 
-            options.Add("?|h|help", value => { PrintUsage(); });
-            options.Add("a|alpha", value => { Generators |= GeneratorType.Alpha; });
-            options.Add("n|numeric", value => { Generators |= GeneratorType.Numeric; });
-            options.Add("s|symbols=", value => { Generators |= GeneratorType.Symbols; });
+            options.Add("?|h|help", value => PrintUsage());
+            options.Add("a|alpha", value => Generators.Add(GeneratorType.Alpha));
+            options.Add("n|numeric", value => Generators.Add(GeneratorType.Numeric));
+            options.Add("s|symbols=", value => Generators.Add(GeneratorType.Symbols));
 
             RemainingParameters = options.Parse(args);
             if (RemainingParameters.Count == 1)
@@ -46,9 +46,16 @@ namespace password
             //
             // Default to all generators if none are specified on the command line.
             //
-            if (Generators == GeneratorType.None)
+            if (Generators.Count == 0)
             {
                 Generator.AddAllGenerators();
+            }
+            else
+            {
+                foreach (var Gen in Generators)
+                {
+                    Generator.AddGenerator(Gen);
+                }
             }
 
             Console.WriteLine(Generator.Generate(PasswordMinLength, PasswordMaxLength));
