@@ -15,40 +15,6 @@ namespace gcal
 {
     class Program
     {
-        /*
-C:\Users\jasonsch\code\cli\gcal\bin\Release\netcoreapp2.1>dotnet gcal.dll -c Potential -f https://www.facebook.com/events/429356794181427/
-
-Unhandled Exception: System.Net.Http.HttpRequestException: No such host is known ---> System.Net.Sockets.SocketException: No such host is known
-   at System.Net.Http.ConnectHelper.ConnectAsync(String host, Int32 port, CancellationToken cancellationToken)
-   --- End of inner exception stack trace ---
-   at Google.Apis.Http.ConfigurableMessageHandler.SendAsync(HttpRequestMessage request, CancellationToken cancellationToken) in C:\Apiary\2018-09-13.09-09-57\Src\Support\Google.Apis.Core\Http\ConfigurableMessageHandler.cs:line 494
-   at System.Net.Http.HttpClient.FinishSendAsyncBuffered(Task`1 sendTask, HttpRequestMessage request, CancellationTokenSource cts, Boolean disposeCts)
-   at Google.Apis.Auth.OAuth2.Requests.TokenRequestExtenstions.ExecuteAsync(TokenRequest request, HttpClient httpClient, String tokenServerUrl, CancellationToken taskCancellationToken, IClock clock) in C:\Apiary\2018-09-13.09-09-57\Src\Support\Google.Apis.Auth\OAuth2\Requests\TokenRequestExtenstions.cs:line 51
-   at Google.Apis.Auth.OAuth2.Flows.AuthorizationCodeFlow.FetchTokenAsync(String userId, TokenRequest request, CancellationToken taskCancellationToken) in C:\Apiary\2018-09-13.09-09-57\Src\Support\Google.Apis.Auth\OAuth2\Flows\AuthorizationCodeFlow.cs:line 315
-   at Google.Apis.Auth.OAuth2.Flows.AuthorizationCodeFlow.RefreshTokenAsync(String userId, String refreshToken, CancellationToken taskCancellationToken) in C:\Apiary\2018-09-13.09-09-57\Src\Support\Google.Apis.Auth\OAuth2\Flows\AuthorizationCodeFlow.cs:line 264
-   at Google.Apis.Auth.OAuth2.UserCredential.RefreshTokenAsync(CancellationToken taskCancellationToken) in C:\Apiary\2018-09-13.09-09-57\Src\Support\Google.Apis.Auth\OAuth2\UserCredential.cs:line 133
-   at Google.Apis.Auth.OAuth2.TokenRefreshManager.RefreshTokenAsync() in C:\Apiary\2018-09-13.09-09-57\Src\Support\Google.Apis.Auth\OAuth2\TokenRefreshManager.cs:line 129
-   at Google.Apis.Auth.OAuth2.TokenRefreshManager.ResultWithUnwrappedExceptions[T](Task`1 task) in C:\Apiary\2018-09-13.09-09-57\Src\Support\Google.Apis.Auth\OAuth2\TokenRefreshManager.cs:line 174
-   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
-   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
---- End of stack trace from previous location where exception was thrown ---
-   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot)
---- End of stack trace from previous location where exception was thrown ---
-   at Google.Apis.Auth.OAuth2.TokenRefreshManager.GetAccessTokenForRequestAsync(CancellationToken cancellationToken) in C:\Apiary\2018-09-13.09-09-57\Src\Support\Google.Apis.Auth\OAuth2\TokenRefreshManager.cs:line 114
-   at Google.Apis.Auth.OAuth2.UserCredential.InterceptAsync(HttpRequestMessage request, CancellationToken taskCancellationToken) in C:\Apiary\2018-09-13.09-09-57\Src\Support\Google.Apis.Auth\OAuth2\UserCredential.cs:line 75
-   at Google.Apis.Http.ConfigurableMessageHandler.SendAsync(HttpRequestMessage request, CancellationToken cancellationToken) in C:\Apiary\2018-09-13.09-09-57\Src\Support\Google.Apis.Core\Http\ConfigurableMessageHandler.cs:line 415
-   at System.Net.Http.HttpClient.FinishSendAsyncBuffered(Task`1 sendTask, HttpRequestMessage request, CancellationTokenSource cts, Boolean disposeCts)
-   at Google.Apis.Requests.ClientServiceRequest`1.ExecuteUnparsedAsync(CancellationToken cancellationToken) in C:\Apiary\2018-09-13.09-09-57\Src\Support\Google.Apis\Requests\ClientServiceRequest.cs:line 180
-   at Google.Apis.Requests.ClientServiceRequest`1.Execute() in C:\Apiary\2018-09-13.09-09-57\Src\Support\Google.Apis\Requests\ClientServiceRequest.cs:line 116
-   at gcal.Program.FindCalendarByName(CalendarService service, String CalendarName) in C:\Users\jasonsch\code\cli\gcal\Program.cs:line 154
-   at gcal.Program.<>c__DisplayClass9_0.<Main>b__2(String value) in C:\Users\jasonsch\code\cli\gcal\Program.cs:line 205
-   at Mono.Options.Option.Invoke(OptionContext c)
-   at Mono.Options.OptionSet.Parse(String argument, OptionContext c)
-   at Mono.Options.OptionSet.Parse(IEnumerable`1 arguments)
-   at gcal.Program.Main(String[] args) in C:\Users\jasonsch\code\cli\gcal\Program.cs:line 216
-*/
-        // TODO -- Support for axs events: https://www.axs.com/events/364765/yonder-mountain-string-band-tickets?src=YBOVMWLI48LN98HDVZGPSPQV&t_tags=YBOVMWLI48LN98HDVZGPSPQV&mkt_campaign=YBOVMWLI48LN98HDVZGPSPQV&mkt_source=AMsySZasdJlhYR4SjRVCortnB_PI&mkt_content=A170_A483_C141547&fbclid=IwAR1fE2hUr7vu4wCder8iXQQhMb063vNSxaMmbAbwis4M-yNqxkYSzEk8Vd8
-        // TODO -- Support for cascade bike events (https://www.cascade.org/rides-and-events-major-rides/seattle-bike-n-brews / https://www.cascade.org/rides-and-events-major-rides/seattle-night-ride)
         // TODO -- Handle siff events (e.g., https://www.siff.net/education/film-appreciation/cinema-dissection/terminator-2)
         // TODO -- Handle events that have more than three dates (e.g., https://www.facebook.com/events/262577911273702/ or https://www.facebook.com/events/2075275352740171/?event_time_id=2075275389406834)
         // TODO -- Add high level notes about what this program does.
