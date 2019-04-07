@@ -26,8 +26,6 @@ namespace gcal
         public bool ParseEvent(string EventURL, List<EventInformation> EventList)
         {
             string EventContents;
-            EventInformation EventInfo = new EventInformation();
-            Match match;
 
             if (!IsAxsUrl(EventURL))
             {
@@ -36,6 +34,7 @@ namespace gcal
 
             EventContents = PageDownloader.GetPageContents(EventURL);
 
+            EventInformation EventInfo = new EventInformation();
             EventInfo.StartDate = GetStartDate(EventContents);
             EventInfo.Title = GetTitle(EventContents);
             EventInfo.Description = EventURL;
@@ -55,7 +54,7 @@ namespace gcal
             }
             else
             {
-                throw new InvalidProgramException("Couldn't parse start time for event!");
+                throw new InvalidProgramException($"Couldn't parse start time for event: {EventContents}!");
             }
         }
 

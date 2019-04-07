@@ -15,7 +15,6 @@ namespace gcal
 {
     class Program
     {
-        // TODO -- Handle siff events (e.g., https://www.siff.net/education/film-appreciation/cinema-dissection/terminator-2)
         // TODO -- Handle events that have more than three dates (e.g., https://www.facebook.com/events/262577911273702/ or https://www.facebook.com/events/2075275352740171/?event_time_id=2075275389406834)
         // TODO -- Add high level notes about what this program does.
         // TODO -- Need to handle FB events that aren't public (OAuth?)
@@ -170,6 +169,7 @@ namespace gcal
             EventInformation EventInfo = new EventInformation();
             string EventUrl = null;
             bool eventAllDay = false;
+            bool ParseOnly = false; // If this is true we parse the event URL and display its info but don't add it to the calendar.
             List<string> NakedParameters = null;
             bool FlagsPassed = false; // If we don't see any arguments then we act like the classic "cal" command
 
@@ -202,7 +202,8 @@ namespace gcal
             options.Add("c|calendar=", value => { CalendarID = FindCalendarByName(service, value); if (CalendarID == null) { PrintUsage("Couldn't find specified calendar!"); } FlagsPassed = true; });
             options.Add("d|description=", value => { EventInfo.Description = value; FlagsPassed = true; });
             options.Add("e|end=", value => { EventInfo.SetEndDate(value); FlagsPassed = true; });
-            options.Add("n|notification=", value => { EventInfo.SetReminderNotification(value); });
+            options.Add("n|notification=", value => { EventInfo.SetReminderNotification(value); FlagsPassed = true; });
+            options.Add("p|parse-only", value => { ParseOnly = true; FlagsPassed = true; });
             options.Add("r|recurrence=", value => { EventInfo.AddRecurrenceRule(value); });
             options.Add("s|start=", value => { EventInfo.SetStartDate(value); FlagsPassed = true; });
             options.Add("t|title=", value => { EventInfo.Title = value; FlagsPassed = true; });
@@ -215,7 +216,7 @@ namespace gcal
             {
                 if (!String.IsNullOrEmpty(EventUrl))
                 {
-                    HandleEventURL(service, CalendarID, EventUrl);
+                    HandleEventURL(service, CalendarID, EventUrl, ParseOnly);
                 }
                 else
                 {
@@ -227,7 +228,7 @@ namespace gcal
                         PrintUsage();
                     }
 
-                    AddCalendarEvent(service, CalendarID, EventInfo, eventAllDay);
+                    AddCalendarEvent(service, CalendarID, EventInfo, eventAllDay, ParseOnly);
                 }
             }
             else
@@ -251,7 +252,7 @@ namespace gcal
             }
         }
 
-        private static bool HandleEventURL(CalendarService service, string CalendarID, string Url)
+        private static bool HandleEventURL(CalendarService service, string CalendarID, string Url, bool ParseOnly)
         {
             List<EventInformation> Events = new List<EventInformation>();
 
@@ -262,14 +263,28 @@ namespace gcal
 
             foreach (var Event in Events)
             {
-                AddCalendarEvent(service, CalendarID, Event, false);
+                AddCalendarEvent(service, CalendarID, Event, false, ParseOnly);
             }
 
             return true;
         }
 
-        public static void AddCalendarEvent(CalendarService service, string CalendarID, EventInformation EventInfo, bool eventAllDay)
+        public static void AddCalendarEvent(CalendarService service, string CalendarID, EventInformation EventInfo, bool eventAllDay, bool ParseOnly)
         {
+            if (ParseOnly)
+            {
+                Console.WriteLine("Event '{0}' starting at '{1:M/d/yyyy h:mmtt}' and ending at {2:M/d/yyyy h:mmtt} successfully parsed.", EventInfo.Title, EventInfo.StartDate, EventInfo.EndDate);
+                if (!string.IsNullOrEmpty(EventInfo.Location))
+                {
+                    Console.WriteLine($"Location: {EventInfo.Location}");
+                }
+
+                if (!string.IsNullOrEmpty(EventInfo.Description))
+                {
+                    Console.WriteLine($"Description: {EventInfo.Description}");
+                }
+            }
+
             Event NewEvent = new Event()
             {
                 Summary = EventInfo.Title,
