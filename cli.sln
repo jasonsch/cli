@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28010.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.156
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "uuid", "uuid\uuid.csproj", "{D3980295-E994-445D-9434-FC08F6488EED}"
 EndProject
@@ -14,6 +14,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "gcal", "gcal\gcal\gcal.csproj", "{86FDB2FA-406D-41ED-9A45-61D03C072EAB}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "gcal.UnitTests", "gcal\gcal.UnitTests\gcal.UnitTests.csproj", "{04F2F171-2EEF-4A2F-B2B6-90A2FC38CF98}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "filecount", "filecount\filecount.csproj", "{A13CEAD3-7E2D-489B-AF84-E84A0F027419}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +43,10 @@ Global
 		{04F2F171-2EEF-4A2F-B2B6-90A2FC38CF98}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{04F2F171-2EEF-4A2F-B2B6-90A2FC38CF98}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{04F2F171-2EEF-4A2F-B2B6-90A2FC38CF98}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A13CEAD3-7E2D-489B-AF84-E84A0F027419}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A13CEAD3-7E2D-489B-AF84-E84A0F027419}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A13CEAD3-7E2D-489B-AF84-E84A0F027419}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A13CEAD3-7E2D-489B-AF84-E84A0F027419}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
