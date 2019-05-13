@@ -21,7 +21,9 @@ namespace gcal
         //      -- https://www.facebook.com/events/163743240932607/
         // TODO -- Support metafilter IRL events: https://irl.metafilter.com/4074/The-needle-moved-trivially
         // TODO -- Couldn't read multiple event page like: https://www.facebook.com/events/323430185071606/?event_time_id=323430201738271
-        // TODO -- use a recurring entry for FB events with multiple dates/times (or some other way to link them so they can all be [e.g.] deleted together).
+        // TODO -- use a recurring entry for FB events with multiple dates/times (or some other way to link them so they can all be [e.g.] deleted together) or if they're
+        //         on adjacent days make one entry (e.g., https://www.facebook.com/events/783809855296368/).
+        // TODO -- We're not properly reading multiple entries for https://www.facebook.com/events/380233632769259/?event_time_id=380233659435923 (we just see the first one).
         //
         // C:\Users\jasonsch\code\WindowsCLI\gcal\bin\Release>gcal -c Potential -f https://www.facebook.com/events/184707418897024/
         // ERROR: Couldn't find start/end time!
