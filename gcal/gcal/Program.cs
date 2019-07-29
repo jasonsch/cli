@@ -77,7 +77,7 @@ namespace gcal
             Console.WriteLine("-c, --calendar <calendar name>\tSpecifies the calendar for this event (defaults to users's primary calendar)");
             Console.WriteLine("-d, --description <event description>\tThe description for the calendar event");
             Console.WriteLine("-e, --end <date>\tThe end date of the entry");
-            Console.WriteLine("-n, --notification <'email|popup==<time period>'>\tThe type of reminder notification and when to show it.");
+            Console.WriteLine("-n, --notification <'email|popup=<time period>'>\tThe type of reminder notification and when to show it.");
             Console.WriteLine("-r, --recurrence <rule>\tA recurrence rule for this event (e.g., 'RRULE:FREQ=DAILY;COUNT=2'). Can be specified multiple times.");
             Console.WriteLine("-s, --start <date>\tThe start date of the entry");
             Console.WriteLine("-t, --title <title>\tThe title for the calendar event");

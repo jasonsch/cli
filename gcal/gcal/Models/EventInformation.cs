@@ -40,7 +40,7 @@ namespace gcal.Models
             match = Regex.Match(Notification, @"^(email|popup)=(.*)$");
             if (match.Success)
             {
-                TimeSpan Span = FuzzyDateParser.ParseOffset(match.Groups[2].Value);
+                TimeSpan Span = FuzzyDateParser.ParseTime(match.Groups[2].Value);
 
                 _Reminders.Add(new EventReminder() { Method = match.Groups[1].Value, Minutes = (int)Span.TotalMinutes });
             }

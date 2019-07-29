@@ -6,7 +6,7 @@ namespace gcal
 {
     public static class FuzzyDateParser
     {
-        private static Dictionary<string, int> PeriodConversions = new Dictionary<string, int>()
+        private static readonly Dictionary<string, int> PeriodConversions = new Dictionary<string, int>()
         {
             {"second", 1},
             {"seconds", 1},
@@ -25,7 +25,7 @@ namespace gcal
         /*
          * Very simple and rigid NL date parser.
          */
-        public static TimeSpan ParseOffset(string Date)
+        public static TimeSpan ParseTime(string Date)
         {
             Match match;
 
