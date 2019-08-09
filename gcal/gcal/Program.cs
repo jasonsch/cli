@@ -129,20 +129,6 @@ namespace gcal
             ShowCalendar(DateTime.Now.Month, DateTime.Now.Year);
         }
 
-        static bool ValidateDateString(string DateToValidate)
-        {
-            try
-            {
-                DateTime.Parse(DateToValidate);
-            }
-            catch (FormatException)
-            {
-                return false;
-            }
-
-            return true;
-        }
-
         //
         // Returns the calendar's ID given its name.
         //
@@ -371,36 +357,6 @@ namespace gcal
             var e = request.Execute();
 
             Console.WriteLine($"Event '{EventInfo.Title}' on '{EventInfo.StartTime}' successfully created at '{e.HtmlLink}'");
-        }
-
-        // TODO -- Not currently used.
-        public static void ListCalendarEvents(CalendarService service)
-        {
-            EventsResource.ListRequest request = service.Events.List("primary");
-            request.TimeMin = DateTime.Now;
-            request.ShowDeleted = false;
-            request.SingleEvents = true;
-            request.MaxResults = 10;
-            request.OrderBy = EventsResource.ListRequest.OrderByEnum.StartTime;
-
-            Events events = request.Execute();
-            Console.WriteLine("Upcoming events:");
-            if (events.Items != null && events.Items.Count > 0)
-            {
-                foreach (var eventItem in events.Items)
-                {
-                    string when = eventItem.Start.DateTime.ToString();
-                    if (String.IsNullOrEmpty(when))
-                    {
-                        when = eventItem.Start.Date;
-                    }
-                    Console.WriteLine("{0} ({1})", eventItem.Summary, when);
-                }
-            }
-            else
-            {
-                Console.WriteLine("No upcoming events found.");
-            }
         }
     }
 }
