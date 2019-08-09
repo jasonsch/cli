@@ -109,6 +109,22 @@ namespace gcal.Models
             }
         }
 
+        public string StartTime
+        {
+            get
+            {
+                if (AllDay)
+                {
+                    return StartDate.Date.ToString("M/d/yyyy");
+                }
+                else
+                {
+                    return StartDate.ToString("M/d/yyyy h:mmtt");
+                }
+            }
+        }
+
+
         public DateTime EndDate { get; set; }
         public bool AllDay { get; set; }
 

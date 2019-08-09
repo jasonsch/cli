@@ -260,6 +260,21 @@ namespace gcal
             }
         }
 
+        private static bool CompareEventsDates(Event eventItem, EventInformation eventInfo)
+        {
+            if (eventItem.Start.Date == null)
+            {
+                return (eventItem.Start.DateTime == eventInfo.StartDate);
+            }
+            else
+            {
+                //
+                // eventItem is an all day event.
+                //
+                return (eventInfo.AllDay && DateTime.Parse(eventItem.Start.Date) == eventInfo.StartDate.Date);
+            }
+        }
+
         private static bool FindCalendarEvent(CalendarService service, string calendarID, EventInformation eventInfo)
         {
             EventsResource.ListRequest request = service.Events.List(calendarID);
@@ -272,7 +287,7 @@ namespace gcal
             Events events = request.Execute();
             foreach (var eventItem in events.Items)
             {
-                if ((eventInfo.AllDay && DateTime.Parse(eventItem.Start.Date) == eventInfo.StartDate.Date) || (eventItem.Start.DateTime == eventInfo.StartDate))
+                if (CompareEventsDates(eventItem, eventInfo))
                 {
                     if (eventItem.Summary == eventInfo.Title)
                     {
@@ -301,6 +316,18 @@ namespace gcal
             return true;
         }
 
+        private static EventDateTime GetEventTime(bool IsAllDay, DateTime date)
+        {
+            if (IsAllDay)
+            {
+                return new EventDateTime() { Date = date.ToString("yyyy-MM-dd") };
+            }
+            else
+            {
+                return new EventDateTime() { DateTime = date, TimeZone = "America/Los_Angeles" }; // TODO -- Get right timezone
+            }
+        }
+
         public static void AddCalendarEvent(CalendarService service, string CalendarID, EventInformation EventInfo, bool ParseOnly)
         {
             if (ParseOnly)
@@ -322,8 +349,8 @@ namespace gcal
                 Summary = EventInfo.Title,
                 Location = EventInfo.Location,
                 Description = EventInfo.Description,
-                Start = new EventDateTime() { DateTime = EventInfo.StartDate, TimeZone = "America/Los_Angeles" }, // TODO -- Get right timezone
-                End = new EventDateTime() { DateTime = EventInfo.EndDate, TimeZone = "America/Los_Angeles" }, // TODO -- Get right timezone
+                Start = GetEventTime(EventInfo.AllDay, EventInfo.StartDate),
+                End = GetEventTime(EventInfo.AllDay, EventInfo.EndDate)
             };
 
             if (EventInfo.RecurrenceRules != null)
@@ -343,7 +370,7 @@ namespace gcal
             var request = service.Events.Insert(NewEvent, CalendarID);
             var e = request.Execute();
 
-            Console.WriteLine("Event '{0}' on '{1:M/d/yyyy h:mmtt}' successfully created at {2}", EventInfo.Title, EventInfo.StartDate, e.HtmlLink);
+            Console.WriteLine($"Event '{EventInfo.Title}' on '{EventInfo.StartTime}' successfully created at '{e.HtmlLink}'");
         }
 
         // TODO -- Not currently used.
