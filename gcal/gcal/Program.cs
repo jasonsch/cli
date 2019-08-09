@@ -170,7 +170,6 @@ namespace gcal
             string CalendarID = "primary";
             EventInformation EventInfo = new EventInformation();
             string EventUrl = null;
-            bool eventAllDay = false;
             bool ParseOnly = false; // If this is true we parse the event URL and display its info but don't add it to the calendar.
             List<string> NakedParameters = null;
             bool FlagsPassed = false; // If we don't see any arguments then we act like the classic "cal" command
@@ -200,7 +199,7 @@ namespace gcal
             // TODO -- Do some sanity checking (end >= start, end not specified if all-day, ...)
             // TODO -- A date string like "2018-01-28" will get round-tripped (through DateTime.Parse()) as having an explicit time of 12AM
             options.Add("?|h|help", value => { PrintUsage(); });
-            options.Add("a|all-day", value => { eventAllDay = true; FlagsPassed = true; });
+            options.Add("a|all-day", value => { EventInfo.AllDay = true; FlagsPassed = true; });
             options.Add("c|calendar=", value => { CalendarID = FindCalendarByName(service, value); if (CalendarID == null) { PrintUsage("Couldn't find specified calendar!"); } FlagsPassed = true; });
             options.Add("d|description=", value => { EventInfo.Description = value; FlagsPassed = true; });
             options.Add("e|end=", value => { EventInfo.SetEndDate(value); FlagsPassed = true; });
@@ -230,7 +229,14 @@ namespace gcal
                         PrintUsage();
                     }
 
-                    AddCalendarEvent(service, CalendarID, EventInfo, eventAllDay, ParseOnly);
+                    if (!FindCalendarEvent(service, CalendarID, EventInfo))
+                    {
+                        AddCalendarEvent(service, CalendarID, EventInfo, ParseOnly);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Found an existing event that matches so ignoring add.");
+                    }
                 }
             }
             else
@@ -254,6 +260,30 @@ namespace gcal
             }
         }
 
+        private static bool FindCalendarEvent(CalendarService service, string calendarID, EventInformation eventInfo)
+        {
+            EventsResource.ListRequest request = service.Events.List(calendarID);
+            request.TimeMin = eventInfo.StartDate - TimeSpan.FromMinutes(1);
+            request.ShowDeleted = false;
+            request.SingleEvents = true;
+            request.MaxResults = 10;
+            request.OrderBy = EventsResource.ListRequest.OrderByEnum.StartTime;
+
+            Events events = request.Execute();
+            foreach (var eventItem in events.Items)
+            {
+                if ((eventInfo.AllDay && DateTime.Parse(eventItem.Start.Date) == eventInfo.StartDate.Date) || (eventItem.Start.DateTime == eventInfo.StartDate))
+                {
+                    if (eventItem.Summary == eventInfo.Title)
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
         private static bool HandleEventURL(CalendarService service, string CalendarID, string Url, bool ParseOnly)
         {
             List<EventInformation> Events = new List<EventInformation>();
@@ -265,13 +295,13 @@ namespace gcal
 
             foreach (var Event in Events)
             {
-                AddCalendarEvent(service, CalendarID, Event, false, ParseOnly);
+                AddCalendarEvent(service, CalendarID, Event, ParseOnly);
             }
 
             return true;
         }
 
-        public static void AddCalendarEvent(CalendarService service, string CalendarID, EventInformation EventInfo, bool eventAllDay, bool ParseOnly)
+        public static void AddCalendarEvent(CalendarService service, string CalendarID, EventInformation EventInfo, bool ParseOnly)
         {
             if (ParseOnly)
             {
