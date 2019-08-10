@@ -216,14 +216,7 @@ namespace gcal
                         PrintUsage();
                     }
 
-                    if (!FindCalendarEvent(service, CalendarID, EventInfo))
-                    {
-                        AddCalendarEvent(service, CalendarID, EventInfo);
-                    }
-                    else
-                    {
-                        Console.WriteLine("Found an existing event that matches so ignoring add.");
-                    }
+                    AddCalendarEvent(service, CalendarID, EventInfo);
                 }
             }
             else
@@ -299,7 +292,6 @@ namespace gcal
             {
                 if (ParseOnly)
                 {
-
                     Console.WriteLine($"Event '{Event.Title}' starting at {Event.StartTime} and ending at {Event.EndDate} was successfully parsed.", Event.Title, Event.StartDate, Event.EndDate);
                     if (!string.IsNullOrEmpty(Event.Location))
                     {
@@ -334,6 +326,18 @@ namespace gcal
 
         public static void AddCalendarEvent(CalendarService service, string CalendarID, EventInformation EventInfo)
         {
+            if (!FindCalendarEvent(service, CalendarID, EventInfo))
+            {
+                InsertCalendarEvent(service, CalendarID, EventInfo);
+            }
+            else
+            {
+                Console.WriteLine("Found an existing event that matches so ignoring add.");
+            }
+        }
+
+        private static void InsertCalendarEvent(CalendarService service, string CalendarID, EventInformation EventInfo)
+        {
             Event NewEvent = new Event()
             {
                 Summary = EventInfo.Title,
@@ -350,11 +354,7 @@ namespace gcal
 
             if (EventInfo.Reminders != null)
             {
-                Event.RemindersData data = new Event.RemindersData();
-
-                data.UseDefault = false;
-                data.Overrides = EventInfo.Reminders;
-                NewEvent.Reminders = data;
+                NewEvent.Reminders = new Event.RemindersData() { UseDefault = false, Overrides = EventInfo.Reminders };
             }
 
             var request = service.Events.Insert(NewEvent, CalendarID);
