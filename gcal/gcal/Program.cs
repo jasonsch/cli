@@ -15,6 +15,7 @@ namespace gcal
 {
     class Program
     {
+        // TODO -- OCR images? E.g., https://www.facebook.com/PonoRanch/photos/a.500038980030584/2591427614225033/?type=3&theater
         // TODO -- Handle events that have more than three dates (e.g., https://www.facebook.com/events/262577911273702/ or https://www.facebook.com/events/2075275352740171/?event_time_id=2075275389406834)
         // TODO -- Add high level notes about what this program does.
         // TODO -- Need to handle FB events that aren't public (OAuth?)
@@ -217,7 +218,7 @@ namespace gcal
 
                     if (!FindCalendarEvent(service, CalendarID, EventInfo))
                     {
-                        AddCalendarEvent(service, CalendarID, EventInfo, ParseOnly);
+                        AddCalendarEvent(service, CalendarID, EventInfo);
                     }
                     else
                     {
@@ -296,7 +297,24 @@ namespace gcal
 
             foreach (var Event in Events)
             {
-                AddCalendarEvent(service, CalendarID, Event, ParseOnly);
+                if (ParseOnly)
+                {
+
+                    Console.WriteLine($"Event '{Event.Title}' starting at {Event.StartTime} and ending at {Event.EndDate} was successfully parsed.", Event.Title, Event.StartDate, Event.EndDate);
+                    if (!string.IsNullOrEmpty(Event.Location))
+                    {
+                        Console.WriteLine($"Location: {Event.Location}");
+                    }
+
+                    if (!string.IsNullOrEmpty(Event.Description))
+                    {
+                        Console.WriteLine($"Description: {Event.Description}");
+                    }
+                }
+                else
+                {
+                    AddCalendarEvent(service, CalendarID, Event);
+                }
             }
 
             return true;
@@ -314,22 +332,8 @@ namespace gcal
             }
         }
 
-        public static void AddCalendarEvent(CalendarService service, string CalendarID, EventInformation EventInfo, bool ParseOnly)
+        public static void AddCalendarEvent(CalendarService service, string CalendarID, EventInformation EventInfo)
         {
-            if (ParseOnly)
-            {
-                Console.WriteLine("Event '{0}' starting at '{1:M/d/yyyy h:mmtt}' and ending at {2:M/d/yyyy h:mmtt} successfully parsed.", EventInfo.Title, EventInfo.StartDate, EventInfo.EndDate);
-                if (!string.IsNullOrEmpty(EventInfo.Location))
-                {
-                    Console.WriteLine($"Location: {EventInfo.Location}");
-                }
-
-                if (!string.IsNullOrEmpty(EventInfo.Description))
-                {
-                    Console.WriteLine($"Description: {EventInfo.Description}");
-                }
-            }
-
             Event NewEvent = new Event()
             {
                 Summary = EventInfo.Title,
