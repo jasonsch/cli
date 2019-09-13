@@ -189,7 +189,7 @@ namespace gcal
             options.Add("a|all-day", value => { EventInfo.AllDay = true; FlagsPassed = true; });
             options.Add("c|calendar=", value => { CalendarID = FindCalendarByName(service, value); if (CalendarID == null) { PrintUsage("Couldn't find specified calendar!"); } FlagsPassed = true; });
             options.Add("d|description=", value => { EventInfo.Description = value; FlagsPassed = true; });
-            options.Add("e|end=", value => { EventInfo.SetEndDate(value); FlagsPassed = true; });
+            options.Add("e|end=", value => { SetEndingDate(EventInfo, value); FlagsPassed = true; });
             options.Add("n|notification=", value => { EventInfo.SetReminderNotification(value); FlagsPassed = true; });
             options.Add("p|parse-only", value => { ParseOnly = true; FlagsPassed = true; });
             options.Add("r|recurrence=", value => { EventInfo.AddRecurrenceRule(value); });
@@ -211,9 +211,13 @@ namespace gcal
                     //
                     // The event start and title are required, everything else is optional.
                     //
-                    if (EventInfo.StartDate == null || String.IsNullOrEmpty(EventInfo.Title))
+                    if (EventInfo.StartDate == null)
                     {
-                        PrintUsage();
+                        PrintUsage("Start date is required!");
+                    }
+                    else if (String.IsNullOrEmpty(EventInfo.Title))
+                    {
+                        PrintUsage("A title is required!");
                     }
 
                     AddCalendarEvent(service, CalendarID, EventInfo);
@@ -237,6 +241,33 @@ namespace gcal
                 {
                     PrintUsage();
                 }
+            }
+        }
+
+        //
+        // The endDate can be absolute or just the time.
+        //
+        private static void SetEndingDate(EventInformation eventInfo, string endDateString)
+        {
+            DateTime endDate;
+
+            if (DateTime.TryParseExact(endDateString, new string[] { "HH:mm", "HH:mm:ss", "hh:mm", "hh:mm:ss", "hh" }, CultureInfo.InvariantCulture, DateTimeStyles.AssumeLocal, out endDate))
+            {
+                if (eventInfo.StartDate == default(DateTime))
+                {
+                    PrintUsage("A relative end time must be specified after the start time on the command line!");
+                }
+
+                eventInfo.EndDate = new DateTime(eventInfo.StartDate.Date.Year, eventInfo.StartDate.Date.Month, eventInfo.StartDate.Date.Day, endDate.Hour, endDate.Minute, endDate.Second);
+            }
+            else
+            {
+                if (!DateTime.TryParse(endDateString, out endDate))
+                {
+                    PrintUsage($"Couldn't parse end date {endDateString}!");
+                }
+
+                eventInfo.EndDate = endDate;
             }
         }
 
