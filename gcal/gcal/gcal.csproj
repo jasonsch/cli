@@ -11,6 +11,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\YellowLab\YellowLab\YellowLab.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="client_secret.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

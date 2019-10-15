@@ -15,7 +15,27 @@ namespace gcal.Models
 
         public void SetStartDate(string Date)
         {
-            StartDate = DateTime.Parse(Date);
+            //
+            // If we can't successfully parse the starting date we'll assume the 
+            //
+            if (!DateTime.TryParse(Date, out _StartDate))
+            {
+                DateTime[] dates = YellowLab.FuzzyDateParser.Parse(Date);
+                if (dates == null)
+                {
+                    throw new ArgumentException($"Couldn't parse date {Date}!"); // TODO
+                }
+
+                StartDate = dates[0];
+                if (dates.Length > 1)
+                {
+                    //
+                    // TODO -- Right now the only recurrence that FuzzyDateParser understands is 
+                    // weekly so we hard-code this.
+                    //
+                    AddRecurrenceRule($"RRULE:FREQ=WEEKLY;COUNT={dates.Length}");
+                }
+            }
         }
 
         public void SetEndDate(string Date)
