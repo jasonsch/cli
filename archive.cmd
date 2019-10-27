@@ -19,7 +19,6 @@ copy /y urlenc\bin\Release\netcoreapp3.0\urlenc.dll temp_binaries
 copy /y uuid\bin\Release\netcoreapp3.0\uuid.dll temp_binaries
 copy /y yas\bin\Release\netcoreapp2.1\yas.dll temp_binaries
 
-powershell.exe -nologo -noprofile -command "& { Add-Type -A 'System.IO.Compression.FileSystem'; [IO.Compression.ZipFile]::CreateFromDirectory('temp_binaries', 'archive.zip'); }"
+powershell.exe -nologo -noprofile -command "& { Add-Type -A 'System.IO.Compression.FileSystem'; [IO.Compression.ZipFile]::CreateFromDirectory('temp_binaries', 'cli.binaries.zip'); }"
 
-REM TODO
-REM rd /s /q temp_binaries
+rd /s /q temp_binaries
