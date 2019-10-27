@@ -111,7 +111,14 @@ namespace gcal
             }
 
             EventInfo.SetStartDate(StartDate);
-            if (!string.IsNullOrEmpty(EndDate))
+            if (string.IsNullOrEmpty(EndDate))
+            {
+                //
+                // If we don't have an explicit end date time just add an hour.
+                //
+                EventInfo.SetEndDate((DateTime.Parse(StartDate)).Add(new TimeSpan(1, 0, 0)).ToString());
+            }
+            else
             {
                 EventInfo.SetEndDate(EndDate);
             }
@@ -150,7 +157,6 @@ namespace gcal
                 return true;
             }
 
-
             match = Regex.Match(EventContents, "<span itemprop=\"startDate\">([^<]+)</span></span> at <span>([^<]+)</span> - <span>([^<]+)</span>");
             if (match.Success)
             {
@@ -158,6 +164,7 @@ namespace gcal
                 EventEndDate = string.Format("{0} {2}", match.Groups[1].Value, match.Groups[3].Value);
                 return true;
             }
+
             match = Regex.Match(EventContents, "<div class=\"_publicProdFeedInfo__timeRowTitle _5xhk\" content=\"([^\"]+)\">");
             if (match.Success)
             {
