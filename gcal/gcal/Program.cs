@@ -186,7 +186,6 @@ namespace gcal
             // TODO -- Do some sanity checking (end >= start, end not specified if all-day, ...)
             // TODO -- A date string like "2018-01-28" will get round-tripped (through DateTime.Parse()) as having an explicit time of 12AM
             options.Add("?|h|help", value => { PrintUsage(); });
-            options.Add("a|all-day", value => { EventInfo.AllDay = true; FlagsPassed = true; });
             options.Add("c|calendar=", value => { CalendarID = FindCalendarByName(service, value); if (CalendarID == null) { PrintUsage("Couldn't find specified calendar!"); } FlagsPassed = true; });
             options.Add("d|description=", value => { EventInfo.Description = value; FlagsPassed = true; });
             options.Add("e|end=", value => { SetEndingDate(EventInfo, value); FlagsPassed = true; });
@@ -343,18 +342,6 @@ namespace gcal
             return true;
         }
 
-        private static EventDateTime GetEventTime(bool IsAllDay, DateTime date)
-        {
-            if (IsAllDay)
-            {
-                return new EventDateTime() { Date = date.ToString("yyyy-MM-dd") };
-            }
-            else
-            {
-                return new EventDateTime() { DateTime = date, TimeZone = "America/Los_Angeles" }; // TODO -- Get right timezone
-            }
-        }
-
         public static void AddCalendarEvent(CalendarService service, string CalendarID, EventInformation EventInfo)
         {
             if (!FindCalendarEvent(service, CalendarID, EventInfo))
@@ -374,8 +361,8 @@ namespace gcal
                 Summary = EventInfo.Title,
                 Location = EventInfo.Location,
                 Description = EventInfo.Description,
-                Start = GetEventTime(EventInfo.AllDay, EventInfo.StartDate),
-                End = GetEventTime(EventInfo.AllDay, EventInfo.EndDate)
+                Start = EventInfo.EventStart,
+                End = EventInfo.EventEnd
             };
 
             if (EventInfo.RecurrenceRules != null)

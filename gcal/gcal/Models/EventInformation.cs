@@ -135,18 +135,64 @@ namespace gcal.Models
             {
                 if (AllDay)
                 {
-                    return StartDate.Date.ToString("M/d/yyyy");
+                    //
+                    // TODO -- This is the formatting that google wants but we shouldn't show this to the user.
+                    //
+                    return StartDate.Date.ToString("yyyy-MM-dd");
                 }
                 else
                 {
-                    return StartDate.ToString("M/d/yyyy h:mmtt");
+                    return StartDate.ToString("yyyy-MM-dd h:mmtt");
+                }
+            }
+        }
+
+        public EventDateTime EventStart
+        {
+            get
+            {
+                // TODO -- We check AllDay once here and then again in StartTime
+                if (AllDay)
+                {
+                    return new EventDateTime() { Date = StartTime };
+                }
+                else
+                {
+                    return new EventDateTime() { DateTime = StartDate, TimeZone = "America/Los_Angeles" }; // TODO -- Get right timezone
+                }
+            }
+        }
+
+        public EventDateTime EventEnd
+        {
+            get
+            {
+                // TODO -- We check AllDay once here and then again in StartTime
+                if (AllDay)
+                {
+                    return new EventDateTime() { Date = StartTime };
+                }
+                else
+                {
+                    return new EventDateTime() { DateTime = EndDate, TimeZone = "America/Los_Angeles" }; // TODO -- Get right timezone
                 }
             }
         }
 
 
+
         public DateTime EndDate { get; set; }
-        public bool AllDay { get; set; }
+
+        public bool AllDay
+        {
+            get
+            {
+                //
+                // TODO -- This is bogus but will mostly work as few events will start at midnight.
+                //
+                return (StartDate.Hour == 0);
+            }
+        }
 
         #endregion
     }
