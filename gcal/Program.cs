@@ -189,9 +189,8 @@ namespace gcal
             options.Add("c|calendar=", value => { CalendarID = FindCalendarByName(service, value); if (CalendarID == null) { PrintUsage("Couldn't find specified calendar!"); } FlagsPassed = true; });
             options.Add("d|description=", value => { EventInfo.Description = value; FlagsPassed = true; });
             options.Add("e|end=", value => { SetEndingDate(EventInfo, value); FlagsPassed = true; });
-            options.Add("n|notification=", value => { EventInfo.SetReminderNotification(value); FlagsPassed = true; });
             options.Add("p|parse-only", value => { ParseOnly = true; FlagsPassed = true; });
-            options.Add("r|recurrence=", value => { EventInfo.AddRecurrenceRule(value); });
+            options.Add("r|reminder=", value => { EventInfo.AddReminder(value); FlagsPassed = true; });
             options.Add("s|start=", value => { EventInfo.SetStartDate(value); FlagsPassed = true; });
             options.Add("t|title=", value => { EventInfo.Title = value; FlagsPassed = true; });
             options.Add("u|url=", value => { EventUrl = value; FlagsPassed = true; });

@@ -33,7 +33,7 @@ namespace gcal.Models
                     // TODO -- Right now the only recurrence that FuzzyDateParser understands is 
                     // weekly so we hard-code this.
                     //
-                    AddRecurrenceRule($"RRULE:FREQ=WEEKLY;COUNT={dates.Length}");
+                    _RecurrenceRules.Add($"RRULE:FREQ=WEEKLY;COUNT={dates.Length}");
                 }
             }
         }
@@ -43,17 +43,12 @@ namespace gcal.Models
             EndDate = DateTime.Parse(Date);
         }
 
-        public void AddRecurrenceRule(string Rule)
-        {
-            _RecurrenceRules.Add(Rule);
-        }
-
         /// <summary>
         /// Notification will look like "(popup|email)=(time period)". E.g.,
         /// "email=2 days" or "popup=3 hours"
         /// </summary>
         /// <param name="Notification"></param>
-        public void SetReminderNotification(string Notification)
+        public void AddReminder(string Notification)
         {
             Match match;
 
