@@ -60,7 +60,9 @@ namespace gcal.Models
             match = Regex.Match(Notification, @"^(email|popup)=(.*)$");
             if (match.Success)
             {
-                TimeSpan Span = FuzzyDateParser.ParseTime(match.Groups[2].Value);
+                DateTime now = DateTime.Now;
+                DateTime future = YellowLab.FuzzyDateParser.Parse(match.Groups[2].Value, now)[0];
+                TimeSpan Span = future - now;
 
                 _Reminders.Add(new EventReminder() { Method = match.Groups[1].Value, Minutes = (int)Span.TotalMinutes });
             }

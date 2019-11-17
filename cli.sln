@@ -9,12 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "uniq", "uniq\uniq.csproj", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "yas", "yas\yas.csproj", "{8ACDEE48-B898-40FB-814C-9726C2174956}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "gcal", "gcal", "{13429F8C-9A0C-487F-A0D1-0D8155FB62D9}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "gcal", "gcal\gcal\gcal.csproj", "{86FDB2FA-406D-41ED-9A45-61D03C072EAB}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "gcal.UnitTests", "gcal\gcal.UnitTests\gcal.UnitTests.csproj", "{04F2F171-2EEF-4A2F-B2B6-90A2FC38CF98}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "filecount", "filecount\filecount.csproj", "{A13CEAD3-7E2D-489B-AF84-E84A0F027419}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "diskusage", "diskusage\diskusage.csproj", "{9C02BF14-29DC-4391-A812-EC6F33BB06F9}"
@@ -39,6 +33,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "grep", "grep\grep.csproj", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YellowLab", "YellowLab\YellowLab\YellowLab.csproj", "{ACC8D7B5-8B5E-4CEE-AE90-0F619CE2EEBE}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "gcal", "gcal\gcal.csproj", "{B0B5E678-646B-4CB8-875A-A29BAA8C26AD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,14 +53,6 @@ Global
 		{8ACDEE48-B898-40FB-814C-9726C2174956}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8ACDEE48-B898-40FB-814C-9726C2174956}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8ACDEE48-B898-40FB-814C-9726C2174956}.Release|Any CPU.Build.0 = Release|Any CPU
-		{86FDB2FA-406D-41ED-9A45-61D03C072EAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{86FDB2FA-406D-41ED-9A45-61D03C072EAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{86FDB2FA-406D-41ED-9A45-61D03C072EAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{86FDB2FA-406D-41ED-9A45-61D03C072EAB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{04F2F171-2EEF-4A2F-B2B6-90A2FC38CF98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{04F2F171-2EEF-4A2F-B2B6-90A2FC38CF98}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{04F2F171-2EEF-4A2F-B2B6-90A2FC38CF98}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{04F2F171-2EEF-4A2F-B2B6-90A2FC38CF98}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A13CEAD3-7E2D-489B-AF84-E84A0F027419}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A13CEAD3-7E2D-489B-AF84-E84A0F027419}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A13CEAD3-7E2D-489B-AF84-E84A0F027419}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -113,13 +101,13 @@ Global
 		{ACC8D7B5-8B5E-4CEE-AE90-0F619CE2EEBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ACC8D7B5-8B5E-4CEE-AE90-0F619CE2EEBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ACC8D7B5-8B5E-4CEE-AE90-0F619CE2EEBE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0B5E678-646B-4CB8-875A-A29BAA8C26AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0B5E678-646B-4CB8-875A-A29BAA8C26AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0B5E678-646B-4CB8-875A-A29BAA8C26AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0B5E678-646B-4CB8-875A-A29BAA8C26AD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{86FDB2FA-406D-41ED-9A45-61D03C072EAB} = {13429F8C-9A0C-487F-A0D1-0D8155FB62D9}
-		{04F2F171-2EEF-4A2F-B2B6-90A2FC38CF98} = {13429F8C-9A0C-487F-A0D1-0D8155FB62D9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3A6DC405-1A63-454F-8DC2-D0D804A41E00}
