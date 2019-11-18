@@ -10,7 +10,7 @@ namespace gcal.Models
     {
         public override string ToString()
         {
-            return String.Format("Title ==> {0}, StartDate ==> {1}, EndDate ==> {2}, Location ==> {3}, Desc ==> {4}", Title, StartDate, EndDate, String.IsNullOrEmpty(Location) ? "" : Location, String.IsNullOrEmpty(Description) ? "" : Description);
+            return $"Title ==> {Title}, StartDate ==> {StartDate}, EndDate ==> {EndDate}, Location ==> {Location}, Desc ==> {Description}";
         }
 
         public void SetStartDate(string Date)
