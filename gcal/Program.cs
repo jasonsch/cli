@@ -269,22 +269,25 @@ namespace gcal
             }
         }
 
-        private static bool CompareEventsDates(Event eventItem, EventInformation eventInfo)
+        private static bool CompareEventsDates(Event existingEvent, EventDateTime newEventTime)
         {
-            if (eventItem.Start.Date == null)
+            if (newEventTime.DateTime == existingEvent.Start.DateTime || newEventTime.Date == existingEvent.Start.Date)
             {
-                return (eventItem.Start.DateTime == eventInfo.StartDate);
+                return true;
             }
-            else
-            {
-                //
-                // eventItem is an all day event.
-                //
-                return (eventInfo.AllDay && DateTime.Parse(eventItem.Start.Date) == eventInfo.StartDate.Date);
-            }
+
+            return false;
         }
 
         private static bool FindCalendarEvent(CalendarService service, string calendarID, EventInformation eventInfo)
+        {
+            IEnumerable<Tuple<EventDateTime, EventDateTime>> events = eventInfo.GetEventTimes();
+            foreach (var t in events)
+            {
+            }
+        }
+
+        private static bool FindCalendarEventWorker(CalendarService service, string calendarID, DateTime date)
         {
             EventsResource.ListRequest request = service.Events.List(calendarID);
             request.TimeMin = eventInfo.StartDate - TimeSpan.FromMinutes(1);

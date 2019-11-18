@@ -8,39 +8,42 @@ namespace gcal.Models
 {
     public class EventInformation
     {
+        private static readonly TimeSpan defaultEventLength = TimeSpan.FromMinutes(60);
+
         public override string ToString()
         {
-            return $"Title ==> {Title}, StartDate ==> {StartDate}, EndDate ==> {EndDate}, Location ==> {Location}, Desc ==> {Description}";
+            return $"Title ==> {Title}, Location ==> {Location}, Desc ==> {Description}";
         }
 
-        public void SetStartDate(string Date)
+        private DateTime[] startDates;
+        private DateTime[] endDates;
+
+        public bool SetStartDate(string date)
         {
-            //
-            // If we can't successfully parse the starting date we'll assume the 
-            //
-            if (!DateTime.TryParse(Date, out _StartDate))
+            startDates = YellowLab.FuzzyDateParser.Parse(date);
+            if (startDates == null)
             {
-                DateTime[] dates = YellowLab.FuzzyDateParser.Parse(Date);
-                if (dates == null)
-                {
-                    throw new ArgumentException($"Couldn't parse date {Date}!"); // TODO
-                }
-
-                StartDate = dates[0];
-                if (dates.Length > 1)
-                {
-                    //
-                    // TODO -- Right now the only recurrence that FuzzyDateParser understands is 
-                    // weekly so we hard-code this.
-                    //
-                    _RecurrenceRules.Add($"RRULE:FREQ=WEEKLY;COUNT={dates.Length}");
-                }
+                return false;
             }
+
+            /*
+            if (dates.Length > 1)
+            {
+                //
+                // TODO -- Right now the only recurrence that FuzzyDateParser understands is 
+                // weekly so we hard-code this.
+                //
+                _RecurrenceRules.Add($"RRULE:FREQ=WEEKLY;COUNT={dates.Length}");
+            }
+            */
+
+            return true;
         }
 
-        public void SetEndDate(string Date)
+        public bool SetEndDate(string date)
         {
-            EndDate = DateTime.Parse(Date);
+            endDates = YellowLab.FuzzyDateParser.Parse(date);
+            return (endDates != null);
         }
 
         /// <summary>
@@ -59,7 +62,7 @@ namespace gcal.Models
                 DateTime future = YellowLab.FuzzyDateParser.Parse(match.Groups[2].Value, now)[0];
                 TimeSpan Span = future - now;
 
-                _Reminders.Add(new EventReminder() { Method = match.Groups[1].Value, Minutes = (int)Span.TotalMinutes });
+                Reminders.Add(new EventReminder() { Method = match.Groups[1].Value, Minutes = (int)Span.TotalMinutes });
             }
             else
             {
@@ -68,17 +71,8 @@ namespace gcal.Models
         }
 
         #region Properties
-        private readonly List<EventReminder> _Reminders = new List<EventReminder>();
-        public EventReminder[] Reminders
-        {
-            get { return _Reminders.ToArray(); }
-        }
-
-        private readonly List<string> _RecurrenceRules = new List<string>();
-        public string[] RecurrenceRules
-        {
-            get { return _RecurrenceRules.ToArray(); }
-        }
+        public List<EventReminder> Reminders { get; private set; } = new List<EventReminder>();
+        public List<string> RecurrenceRules { get; private set; } = new List<string>();
 
         private string _Title;
         public string Title
@@ -111,18 +105,6 @@ namespace gcal.Models
             set
             {
                 _Location = WebUtility.HtmlDecode(value);
-            }
-        }
-
-        private DateTime _StartDate;
-        public DateTime StartDate
-        {
-            get { return _StartDate; }
-            set
-            {
-                _StartDate = value;
-                // We assume events last one hour unless otherwise specified.
-                EndDate = value.AddHours(1.0);
             }
         }
 
@@ -176,19 +158,48 @@ namespace gcal.Models
             }
         }
 
-
-
-        public DateTime EndDate { get; set; }
-
-        public bool AllDay
+        /// <summary>
+        /// Returns a Tuple of start and end times for all the events (there can be more than one if it's a recurring event).
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Tuple<EventDateTime, EventDateTime>> GetEventTimes()
         {
-            get
+            List<Tuple<EventDateTime, EventDateTime>> events = new List<Tuple<EventDateTime, EventDateTime>>();
+            int i = 0;
+
+            foreach (DateTime startDate in startDates)
             {
-                //
-                // TODO -- This is bogus but will mostly work as few events will start at midnight.
-                //
-                return (StartDate.Hour == 0);
+                DateTime endDate;
+
+                if (endDates == null)
+                {
+                    if (IsAllDayEvent(startDate))
+                    {
+                        endDate = startDate;
+                    }
+                    else
+                    {
+                        // If we don't have an explicit end date then we assume one hour.
+                        endDate = startDate + defaultEventLength;
+                    }
+                }
+                else
+                {
+                    endDate = endDates[i];
+                }
+
+                ++i;
             }
+
+            return events;
+        }
+
+        private bool IsAllDayEvent(DateTime date)
+        {
+            //
+            // TODO -- This is bogus but will mostly work as few events will start at midnight.
+            //
+            return (date.Hour == 0);
         }
 
         #endregion
