@@ -46,7 +46,9 @@ namespace gcal
                     EventTitle = "Error! Couldn't determine title!";
                 }
 
-                EventList.Add(new EventInformation() { Title = EventTitle, StartDate = StartTime, Location = $"{match.Groups[3].Value} ({match.Groups[4].Value})", Description = EventURL });
+                EventInformation eventInfo = new EventInformation() { Title = EventTitle, Location = $"{match.Groups[3].Value} ({match.Groups[4].Value})", Description = EventURL };
+                eventInfo.SetStartDate(StartTime.ToString());
+                EventList.Add(eventInfo);
 
                 return true;
             }

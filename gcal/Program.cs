@@ -77,7 +77,7 @@ namespace gcal
             Console.WriteLine("-a, --all-day\tThis event lasts all day");
             Console.WriteLine("-c, --calendar <calendar name>\tSpecifies the calendar for this event (defaults to users's primary calendar)");
             Console.WriteLine("-d, --description <event description>\tThe description for the calendar event");
-            Console.WriteLine("-e, --end <date>\tThe end date of the entry");
+            Console.WriteLine("-e, --end <date>\tThe end date of the event, can be a relative time (e.g., '30 minutes'");
             Console.WriteLine("-n, --notification <'email|popup=<time period>'>\tThe type of reminder notification and when to show it.");
             Console.WriteLine("-r, --recurrence <rule>\tA recurrence rule for this event (e.g., 'RRULE:FREQ=DAILY;COUNT=2'). Can be specified multiple times.");
             Console.WriteLine("-s, --start <date>\tThe start date of the entry");
@@ -188,7 +188,7 @@ namespace gcal
             options.Add("?|h|help", value => { PrintUsage(); });
             options.Add("c|calendar=", value => { CalendarID = FindCalendarByName(service, value); if (CalendarID == null) { PrintUsage("Couldn't find specified calendar!"); } FlagsPassed = true; });
             options.Add("d|description=", value => { EventInfo.Description = value; FlagsPassed = true; });
-            options.Add("e|end=", value => { SetEndingDate(EventInfo, value); FlagsPassed = true; });
+            options.Add("e|end=", value => { EventInfo.SetEndDate(value); FlagsPassed = true; });
             options.Add("p|parse-only", value => { ParseOnly = true; FlagsPassed = true; });
             options.Add("r|reminder=", value => { EventInfo.AddReminder(value); FlagsPassed = true; });
             options.Add("s|start=", value => { EventInfo.SetStartDate(value); FlagsPassed = true; });
@@ -209,7 +209,7 @@ namespace gcal
                     //
                     // The event start and title are required, everything else is optional.
                     //
-                    if (EventInfo.StartDate == null)
+                    if (EventInfo.GetEventTimes().Count == 0)
                     {
                         PrintUsage("Start date is required!");
                     }
@@ -242,33 +242,6 @@ namespace gcal
             }
         }
 
-        //
-        // The endDate can be absolute or just the time.
-        //
-        private static void SetEndingDate(EventInformation eventInfo, string endDateString)
-        {
-            DateTime endDate;
-
-            if (DateTime.TryParseExact(endDateString, new string[] { "HH:mm", "HH:mm:ss", "hh:mm", "hh:mm:ss", "hh" }, CultureInfo.InvariantCulture, DateTimeStyles.AssumeLocal, out endDate))
-            {
-                if (eventInfo.StartDate == default(DateTime))
-                {
-                    PrintUsage("A relative end time must be specified after the start time on the command line!");
-                }
-
-                eventInfo.EndDate = new DateTime(eventInfo.StartDate.Date.Year, eventInfo.StartDate.Date.Month, eventInfo.StartDate.Date.Day, endDate.Hour, endDate.Minute, endDate.Second);
-            }
-            else
-            {
-                if (!DateTime.TryParse(endDateString, out endDate))
-                {
-                    PrintUsage($"Couldn't parse end date {endDateString}!");
-                }
-
-                eventInfo.EndDate = endDate;
-            }
-        }
-
         private static bool CompareEventsDates(Event existingEvent, EventDateTime newEventTime)
         {
             if (newEventTime.DateTime == existingEvent.Start.DateTime || newEventTime.Date == existingEvent.Start.Date)
@@ -284,13 +257,31 @@ namespace gcal
             IEnumerable<Tuple<EventDateTime, EventDateTime>> events = eventInfo.GetEventTimes();
             foreach (var t in events)
             {
+                if (FindCalendarEventWorker(service, calendarID, eventInfo, t.Item1))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private static DateTime GetDateTimeFromEventDateTime(EventDateTime dateTime)
+        {
+            if (dateTime.DateTime.HasValue)
+            {
+                return dateTime.DateTime.Value;
+            }
+            else
+            {
+                return DateTime.Parse(dateTime.Date);
             }
         }
 
-        private static bool FindCalendarEventWorker(CalendarService service, string calendarID, DateTime date)
+        private static bool FindCalendarEventWorker(CalendarService service, string calendarID, EventInformation eventInfo, EventDateTime date)
         {
             EventsResource.ListRequest request = service.Events.List(calendarID);
-            request.TimeMin = eventInfo.StartDate - TimeSpan.FromMinutes(1);
+            request.TimeMin = GetDateTimeFromEventDateTime(date) - TimeSpan.FromMinutes(1);
             request.ShowDeleted = false;
             request.SingleEvents = true;
             request.MaxResults = 10;
@@ -299,7 +290,7 @@ namespace gcal
             Events events = request.Execute();
             foreach (var eventItem in events.Items)
             {
-                if (CompareEventsDates(eventItem, eventInfo))
+                if (CompareEventsDates(eventItem, date))
                 {
                     if (eventItem.Summary == eventInfo.Title)
                     {
@@ -324,7 +315,10 @@ namespace gcal
             {
                 if (ParseOnly)
                 {
-                    Console.WriteLine($"Event '{Event.Title}' starting at {Event.StartTime} and ending at {Event.EndDate} was successfully parsed.", Event.Title, Event.StartDate, Event.EndDate);
+                    List<Tuple<EventDateTime, EventDateTime>> times = Event.GetEventTimes();
+
+                    System.Diagnostics.Debug.Assert(times.Count == 1);
+                    Console.WriteLine($"Event '{Event.Title}' starting at {times[0].Item1} and ending at {times[0].Item2} was successfully parsed.");
                     if (!string.IsNullOrEmpty(Event.Location))
                     {
                         Console.WriteLine($"Location: {Event.Location}");
@@ -348,7 +342,10 @@ namespace gcal
         {
             if (!FindCalendarEvent(service, CalendarID, EventInfo))
             {
-                InsertCalendarEvent(service, CalendarID, EventInfo);
+                foreach (var time in EventInfo.GetEventTimes())
+                {
+                    InsertCalendarEvent(service, CalendarID, EventInfo, time.Item1, time.Item2);
+                }
             }
             else
             {
@@ -356,15 +353,15 @@ namespace gcal
             }
         }
 
-        private static void InsertCalendarEvent(CalendarService service, string CalendarID, EventInformation EventInfo)
+        private static void InsertCalendarEvent(CalendarService service, string CalendarID, EventInformation EventInfo, EventDateTime start, EventDateTime end)
         {
             Event NewEvent = new Event()
             {
                 Summary = EventInfo.Title,
                 Location = EventInfo.Location,
                 Description = EventInfo.Description,
-                Start = EventInfo.EventStart,
-                End = EventInfo.EventEnd
+                Start = start,
+                End = end
             };
 
             if (EventInfo.RecurrenceRules != null)
@@ -380,7 +377,7 @@ namespace gcal
             var request = service.Events.Insert(NewEvent, CalendarID);
             var e = request.Execute();
 
-            Console.WriteLine($"Event '{EventInfo.Title}' on '{EventInfo.StartTime}' successfully created at '{e.HtmlLink}'");
+            Console.WriteLine($"Event '{EventInfo.Title}' on '{GetDateTimeFromEventDateTime(start)}' successfully created at '{e.HtmlLink}'");
         }
     }
 }

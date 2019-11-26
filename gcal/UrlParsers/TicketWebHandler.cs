@@ -53,8 +53,10 @@ namespace gcal
                 string json = match.Groups[0].Value.Substring(35);
                 json = json.Remove(json.Length - 10);
 
-                EventDataJson EventInfo = JsonConvert.DeserializeObject<EventDataJson>(json);
-                EventList.Add(new EventInformation() { Title = EventInfo.name, StartDate = DateTime.Parse(EventInfo.startDate), Location = EventInfo.location.name, Description = EventUrl });
+                EventDataJson twEventInfo = JsonConvert.DeserializeObject<EventDataJson>(json);
+                EventInformation eventInfo = new EventInformation() { Title = twEventInfo.name, Location = twEventInfo.location.name, Description = EventUrl };
+                eventInfo.SetStartDate(twEventInfo.startDate);
+                EventList.Add(eventInfo);
 
                 return true;
             }

@@ -42,7 +42,12 @@ namespace gcal.Models
 
         public bool SetEndDate(string date)
         {
-            endDates = YellowLab.FuzzyDateParser.Parse(date);
+            //
+            // TODO -- We want the user to be able to specify an amount of time for the event (e.g., "one hour").
+            // We can do that if they already gave us a start time but if they haven't then we're screwed (we could
+            // save the value and process it when we get a start time but that seems like a lot of work).
+            //
+            endDates = YellowLab.FuzzyDateParser.Parse(date, startDates != null ? startDates[0] : DateTime.Now);
             return (endDates != null);
         }
 
@@ -108,61 +113,11 @@ namespace gcal.Models
             }
         }
 
-        public string StartTime
-        {
-            get
-            {
-                if (AllDay)
-                {
-                    //
-                    // TODO -- This is the formatting that google wants but we shouldn't show this to the user.
-                    //
-                    return StartDate.Date.ToString("yyyy-MM-dd");
-                }
-                else
-                {
-                    return StartDate.ToString("yyyy-MM-dd h:mmtt");
-                }
-            }
-        }
-
-        public EventDateTime EventStart
-        {
-            get
-            {
-                // TODO -- We check AllDay once here and then again in StartTime
-                if (AllDay)
-                {
-                    return new EventDateTime() { Date = StartTime };
-                }
-                else
-                {
-                    return new EventDateTime() { DateTime = StartDate, TimeZone = "America/Los_Angeles" }; // TODO -- Get right timezone
-                }
-            }
-        }
-
-        public EventDateTime EventEnd
-        {
-            get
-            {
-                // TODO -- We check AllDay once here and then again in StartTime
-                if (AllDay)
-                {
-                    return new EventDateTime() { Date = StartTime };
-                }
-                else
-                {
-                    return new EventDateTime() { DateTime = EndDate, TimeZone = "America/Los_Angeles" }; // TODO -- Get right timezone
-                }
-            }
-        }
-
         /// <summary>
         /// Returns a Tuple of start and end times for all the events (there can be more than one if it's a recurring event).
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<Tuple<EventDateTime, EventDateTime>> GetEventTimes()
+        public List<Tuple<EventDateTime, EventDateTime>> GetEventTimes()
         {
             List<Tuple<EventDateTime, EventDateTime>> events = new List<Tuple<EventDateTime, EventDateTime>>();
             int i = 0;
@@ -188,13 +143,27 @@ namespace gcal.Models
                     endDate = endDates[i];
                 }
 
+                events.Add(new Tuple<EventDateTime, EventDateTime>(EventTimeFromDate(startDate), EventTimeFromDate(endDate)));
+
                 ++i;
             }
 
             return events;
         }
 
-        private bool IsAllDayEvent(DateTime date)
+        private static EventDateTime EventTimeFromDate(DateTime date)
+        {
+            if (IsAllDayEvent(date))
+            {
+                return new EventDateTime() { Date = date.ToString("yyyy-MM-dd") };
+            }
+            else
+            {
+                return new EventDateTime() { DateTime = date, TimeZone = "America/Los_Angeles" }; // TODO
+            }
+        }
+
+        private static bool IsAllDayEvent(DateTime date)
         {
             //
             // TODO -- This is bogus but will mostly work as few events will start at midnight.

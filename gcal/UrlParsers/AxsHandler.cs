@@ -35,7 +35,7 @@ namespace gcal
             EventContents = PageDownloader.GetPageContents(EventURL);
 
             EventInformation EventInfo = new EventInformation();
-            EventInfo.StartDate = GetStartDate(EventContents);
+            EventInfo.SetStartDate(GetStartDate(EventContents));
             EventInfo.Title = GetTitle(EventContents);
             EventInfo.Description = EventURL;
             EventInfo.Location = GetLocation(EventContents);
@@ -43,14 +43,14 @@ namespace gcal
             return true;
         }
 
-        private static DateTime GetStartDate(string EventContents)
+        private static string GetStartDate(string EventContents)
         {
             Match match;
 
             match = Regex.Match(EventContents, @"<meta itemprop=""startDate"" content=""(.*)"">");
             if (match.Success)
             {
-                return DateTime.Parse(match.Groups[1].Value);
+                return match.Groups[1].Value;
             }
             else
             {
