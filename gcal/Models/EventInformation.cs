@@ -151,18 +151,13 @@ namespace gcal.Models
             return events;
         }
 
+        //  TODO -- extension method
         private static EventDateTime EventTimeFromDate(DateTime date)
         {
-            if (IsAllDayEvent(date))
-            {
-                return new EventDateTime() { Date = date.ToString("yyyy-MM-dd") };
-            }
-            else
-            {
-                return new EventDateTime() { DateTime = date, TimeZone = "America/Los_Angeles" }; // TODO
-            }
+            return new EventDateTime() { DateTime = date, TimeZone = "America/Los_Angeles" }; // TODO
         }
 
+        // TODO -- Get rid of this thing; it's too dangerous.
         private static bool IsAllDayEvent(DateTime date)
         {
             //
