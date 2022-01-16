@@ -2,38 +2,212 @@
 using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json;
+using Mono.Options;
 
 namespace datpass
 {
-    class Program
+    partial class Program
     {
-        static void Main(string[] args)
+        enum PasswordAction
         {
-            if (args.Length != 2)
+            Add, // Add a new entry
+            Delete, // Deletes an entry
+            Find, // Find entries based on a URL fragment
+            Update // Update an entry's password
+        }
+
+        class ConfigOptions
+        {
+            public ConfigOptions()
+            {
+                passwordFile = System.Environment.GetEnvironmentVariable("DATPASS_PASSWORD_FILE");
+                action = PasswordAction.Find;
+            }
+
+            /// <summary>
+            /// Can be specified on the command line; if not, we look for using the environment variable DATPASS_PASSWORD_FILE.
+            /// </summary>
+            public string passwordFile;
+
+            /// <summary>
+            /// The URL for the entry.
+            /// </summary>
+            public string url;
+            public string userName;
+
+            public PasswordAction action;
+        }
+
+        static void PrintUsage(bool invalidParameter = false)
+        {
+            // TODO
+            if (invalidParameter)
             {
                 Console.WriteLine("Error: Wrong number of args!");
-                Console.WriteLine("Usage: datpass <password file> <url fragment>");
-                return;
             }
-            string PasswordFile = args[0];
-            // TODO -- Mask password so it doesn't show up as it's typed in the console.
+            Console.WriteLine("Usage: datpass [?|h|help] [-a|--add] [-f|--file <password file>] [-s|--set] [-u|--username] <username>] <url>");
+            System.Environment.Exit(1);
+        }
+
+        static ConfigOptions ParseParameters(string[] args)
+        {
+            // TODO -- Prevent multiple action commands.
+            ConfigOptions config = new ConfigOptions();
+            OptionSet options = new OptionSet();
+            options.Add("?|h|help", value => { PrintUsage(); });
+            options.Add("a|add", value => { config.action = PasswordAction.Add; });
+            options.Add("d|delete", value => { config.action = PasswordAction.Delete; });
+            options.Add("f|file=", value => { config.passwordFile = value; });
+            options.Add("s|set", value => { config.action = PasswordAction.Update; });
+            options.Add("u|username=", value => { config.userName = value; });
+
+            List<string> nakedParameters = options.Parse(args);
+            if (nakedParameters.Count != 1)
+            {
+                PrintUsage();
+            }
+            config.url = nakedParameters[0];
+
+            return config;
+        }
+
+        static string ReadMaskedString()
+        {
+            // We set these colors to the same value to hide the password that's typed..
+            var color = Console.ForegroundColor;
+            Console.ForegroundColor = Console.BackgroundColor;
+            string str = Console.ReadLine();
+            Console.ForegroundColor = color;
+
+            return str;
+        }
+
+        static void Main(string[] args)
+        {
+            var config = ParseParameters(args);
+
             Console.WriteLine("Master password: ");
-            string MasterPassword = Console.ReadLine();
-            List<PasswordEntry> Passwords = ReadPasswords(PasswordFile, MasterPassword);
+            string masterPassword = ReadMaskedString();
 
-            PasswordEntry Entry = Passwords.Find(pe => pe.Url.Contains(args[1], StringComparison.CurrentCultureIgnoreCase));
-            Console.WriteLine($"user ==> {Entry.Account}, password ==> {Entry.Password}");
+            List<PasswordEntry> passwords = ReadPasswords(config.passwordFile, masterPassword);
+
+            if (config.action == PasswordAction.Add)
+            {
+                if (AddPassword(passwords, config.url, config.userName))
+                {
+                    WritePasswords(config.passwordFile, masterPassword, passwords);
+                }
+            }
+            else if (config.action == PasswordAction.Delete)
+            {
+                if (DeletePassword(passwords, config.url, config.userName))
+                {
+                    WritePasswords(config.passwordFile, masterPassword, passwords);
+                }
+            }
+            else if (config.action == PasswordAction.Find)
+            {
+                var entries = passwords.FindAll(pe => pe.url.Contains(config.url, StringComparison.CurrentCultureIgnoreCase));
+                foreach (var entry in entries)
+                {
+                    Console.WriteLine(entry);
+                }
+            }
+            else
+            {
+                if (UpdatePassword(passwords, config.url))
+                {
+                    WritePasswords(config.passwordFile, masterPassword, passwords);
+                }
+            }
         }
 
-        private static void WritePasswords(string PasswordFile, string MasterPassword, List<PasswordEntry> Passwords)
+        private static bool DeletePassword(List<PasswordEntry> passwords, string url, string userName)
         {
-            string Contents = Encryption.Encrypt(JsonConvert.SerializeObject(Passwords), MasterPassword);
-            File.WriteAllText(PasswordFile, Contents);
+            var entry = passwords.Find(pe => pe.url.Contains(url, StringComparison.CurrentCultureIgnoreCase) && pe.account == userName);
+            if (entry == default(PasswordEntry))
+            {
+                Console.WriteLine("Couldn't find any entry for {0}!", url);
+                return false;
+            }
+
+            Console.WriteLine("Deleting entry for {0} / {1}", entry.url, entry.account);
+            passwords.Remove(entry);
+            return true;
         }
 
-        private static List<PasswordEntry> ReadPasswords(string PasswordFile, string MasterPassword)
+        private static bool AddPassword(List<PasswordEntry> passwords, string url, string userName)
         {
-            return JsonConvert.DeserializeObject<List<PasswordEntry>>(Encryption.Decrypt(File.ReadAllText(PasswordFile), MasterPassword));
+            var entries = passwords.FindAll(pe => pe.url.Contains(url, StringComparison.CurrentCultureIgnoreCase) && pe.account == userName);
+            if (entries.Count != 0)
+            {
+                Console.WriteLine("There's an existing entry for {0} / {1}", url, userName);
+                return false;
+            }
+
+            Console.Write("Title: ");
+            string title = Console.ReadLine();
+
+            var passwordGenerator = new PasswordGenerator(10, 15);
+            passwordGenerator.AddAllGenerators();
+            string password = passwordGenerator.Generate();
+            Console.WriteLine("Password for {0}/{1} is {2}", url, userName, password);
+
+            var pe = new PasswordEntry(url, userName, password, title);
+            passwords.Add(pe);
+
+            return true;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="passwords"></param>
+        /// <param name="url"></param>
+        /// <returns>True if the password list was modified, meaning the passwords should be re-written.</returns>
+        private static bool UpdatePassword(List<PasswordEntry> passwords, string url)
+        {
+            var entries = passwords.FindAll(pe => pe.url.Contains(url, StringComparison.CurrentCultureIgnoreCase));
+            if (entries.Count == 0)
+            {
+                // TODO -- Some kind of fuzzy searching.
+                Console.WriteLine("Couldn't find any entries for {0}", url);
+            }
+            else if (entries.Count == 1)
+            {
+                Console.WriteLine("Enter the new password: ");
+                string newPassword = ReadMaskedString();
+                entries[0].UpdatePassword(newPassword);
+            }
+            else
+            {
+
+                foreach (var entry in entries)
+                {
+                    Console.WriteLine($"user ==> {entry.account}, title ==> {entry.label}, password ==> {entry.password}");
+                }
+            }
+
+            return entries.Count != 0;
+        }
+
+        private static void WritePasswords(string passwordFile, string masterPassword, List<PasswordEntry> passwords)
+        {
+            string contents = Encryption.Encrypt(JsonConvert.SerializeObject(passwords), masterPassword);
+            File.WriteAllText(passwordFile, contents);
+        }
+
+        private static List<PasswordEntry> ReadPasswords(string passwordFile, string masterPassword)
+        {
+            if (File.Exists(passwordFile))
+            {
+                return JsonConvert.DeserializeObject<List<PasswordEntry>>(Encryption.Decrypt(File.ReadAllText(passwordFile), masterPassword));
+            }
+            else
+            {
+                Console.WriteLine("Password file '{0}' doesn't exist, assuming this is the first run ...", passwordFile);
+                return new List<PasswordEntry>();
+            }
         }
     }
 }

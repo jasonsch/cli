@@ -68,7 +68,7 @@ namespace datpass
 
             for (int i = 0; i < Length; ++i)
             {
-                int GeneratorIndex = random.Next(0, Generators.Count);
+                int GeneratorIndex = random.Next(0, Generators.Count - 1);
                 Password.Append(Generators[GeneratorIndex].Invoke());
             }
 
