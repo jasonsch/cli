@@ -1,3 +1,4 @@
+@echo off
 mkdir temp_binaries
 
 copy /y b64dec\bin\Release\netcoreapp3.0\b64dec.dll temp_binaries
@@ -6,6 +7,7 @@ copy /y datpass\bin\Release\netcoreapp3.0\datpass.dll temp_binaries
 copy /y datpass\bin\Release\netcoreapp3.0\Newtonsoft.Json.dll temp_binaries
 copy /y diskusage\bin\Release\netcoreapp2.1\diskusage.dll temp_binaries
 copy /y filecount\bin\Release\netcoreapp2.2\filecount.dll temp_binaries
+copy /y find\bin\Release\netcoreapp2.2\find.exe temp_binaries
 copy /y flatten\bin\Release\netcoreapp3.0\flatten.dll temp_binaries
 copy /y gcal\bin\Release\netcoreapp2.1\gcal.dll temp_binaries
 copy /y grep\bin\Release\netcoreapp3.0\grep.dll temp_binaries
