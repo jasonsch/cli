@@ -12,8 +12,7 @@ namespace uuid
             }
             else
             {
-                Guid uuid;
-                bool IsValidGUID = Guid.TryParse(args[0], out uuid);
+                bool IsValidGUID = Guid.TryParse(args[0], out Guid uuid);
                 Console.WriteLine($"'{args[0]}' is " + (IsValidGUID ? "" : "NOT ") + "a valid GUID");
             }
         }
