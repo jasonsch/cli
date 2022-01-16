@@ -153,7 +153,6 @@ namespace gcal
         static void Main(string[] args)
         {
             UserCredential credential;
-            OptionSet options = new OptionSet();
             string CalendarID = "primary";
             EventInformation EventInfo = new EventInformation();
             string EventUrl = null;
@@ -185,6 +184,7 @@ namespace gcal
             // TODO -- Check for required arguments
             // TODO -- Do some sanity checking (end >= start, end not specified if all-day, ...)
             // TODO -- A date string like "2018-01-28" will get round-tripped (through DateTime.Parse()) as having an explicit time of 12AM
+            OptionSet options = new OptionSet();
             options.Add("?|h|help", value => { PrintUsage(); });
             options.Add("c|calendar=", value => { CalendarID = FindCalendarByName(service, value); if (CalendarID == null) { PrintUsage("Couldn't find specified calendar!"); } FlagsPassed = true; });
             options.Add("d|description=", value => { EventInfo.Description = value; FlagsPassed = true; });
