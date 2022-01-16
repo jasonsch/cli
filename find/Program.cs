@@ -64,7 +64,7 @@ namespace find
         {
             name = Regex.Replace(name, "\\.", "\\.");
             name = Regex.Replace(name, "\\*", "[a-zA-Z0-9]+");
-            Console.WriteLine("name is now ==> " + name); // TODO
+
             return name;
         }
 
