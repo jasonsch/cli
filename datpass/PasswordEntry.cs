@@ -85,7 +85,7 @@ namespace datpass
 
         public override string ToString()
         {
-            return string.Format($"URL: {url}, user: {account}, title: {label}, password: {password}, created: {creationDate}, updated: {updateDate}");
+            return $"URL: {url}, user: {account}, title: {label}, password: {password}, created: {creationDate}, updated: {updateDate}";
         }
     }
 }
