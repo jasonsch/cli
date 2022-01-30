@@ -82,7 +82,7 @@ namespace gcal
             Console.WriteLine("-r, --recurrence <rule>\tA recurrence rule for this event (e.g., 'RRULE:FREQ=DAILY;COUNT=2'). Can be specified multiple times.");
             Console.WriteLine("-s, --start <date>\tThe start date of the entry");
             Console.WriteLine("-t, --title <title>\tThe title for the calendar event");
-            Console.WriteLine("-u, --url<URL>\tAn EventBrite, TicketWeb, or Metafilter IRL URL");
+            Console.WriteLine("-u, --url<URL>\tAn EventBrite, Facebook, Metafilter IRL, or TicketWeb URL");
             Console.WriteLine("-w, --where <location>\tThe location for the calendar event");
             Console.WriteLine("-?, -h, --help\tDisplays this usage");
 
