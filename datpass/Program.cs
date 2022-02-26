@@ -30,10 +30,19 @@ namespace datpass
             public string passwordFile;
 
             /// <summary>
-            /// The URL for the entry.
+            /// The URL that we're operating on.
             /// </summary>
             public string url;
+
+            /// <summary>
+            /// The username to use if we're creating a new entry (only valid sometimes).
+            /// </summary>
             public string userName;
+
+            /// <summary>
+            /// The password to use if we're updating an existing entry and the user specifies one.
+            /// </summary>
+            public string password;
 
             public PasswordAction action;
         }
@@ -45,7 +54,7 @@ namespace datpass
             {
                 Console.WriteLine("Error: Wrong number of args!");
             }
-            Console.WriteLine("Usage: datpass [?|h|help] [-a|--add] [-f|--file <password file>] [-s|--set] [-u|--username] <username>] <url>");
+            Console.WriteLine("Usage: datpass [?|h|help] [-a|--add] [-f|--file <password file>] [-s|--set <password (can be empty)>] [-u|--username] <username>] <url>");
             System.Environment.Exit(1);
         }
 
@@ -58,7 +67,7 @@ namespace datpass
             options.Add("a|add", value => { config.action = PasswordAction.Add; });
             options.Add("d|delete", value => { config.action = PasswordAction.Delete; });
             options.Add("f|file=", value => { config.passwordFile = value; });
-            options.Add("s|set", value => { config.action = PasswordAction.Update; });
+            options.Add("s|set=", value => { config.action = PasswordAction.Update; config.password = value; });
             options.Add("u|username=", value => { config.userName = value; });
 
             List<string> nakedParameters = options.Parse(args);
@@ -115,7 +124,7 @@ namespace datpass
             }
             else
             {
-                if (UpdatePassword(passwords, config.url))
+                if (UpdatePassword(passwords, config.url, config.password))
                 {
                     WritePasswords(config.passwordFile, masterPassword, passwords);
                 }
@@ -165,7 +174,7 @@ namespace datpass
         /// <param name="passwords"></param>
         /// <param name="url"></param>
         /// <returns>True if the password list was modified, meaning the passwords should be re-written.</returns>
-        private static bool UpdatePassword(List<PasswordEntry> passwords, string url)
+        private static bool UpdatePassword(List<PasswordEntry> passwords, string url, string password)
         {
             var entries = passwords.FindAll(pe => pe.url.Contains(url, StringComparison.CurrentCultureIgnoreCase));
             if (entries.Count == 0)
@@ -175,13 +184,19 @@ namespace datpass
             }
             else if (entries.Count == 1)
             {
-                Console.WriteLine("Enter the new password: ");
-                string newPassword = ReadMaskedString();
-                entries[0].UpdatePassword(newPassword);
+                if (string.IsNullOrEmpty(password))
+                {
+                    var passwordGenerator = new PasswordGenerator(10, 15);
+                    passwordGenerator.AddAllGenerators();
+                    password = passwordGenerator.Generate();
+                }
+
+                entries[0].UpdatePassword(password);
+                Console.WriteLine("Password for {0} is now '{1}'", url, password);
             }
             else
             {
-
+                Console.WriteLine("URL {0} was ambiguous:", url);
                 foreach (var entry in entries)
                 {
                     Console.WriteLine($"user ==> {entry.account}, title ==> {entry.label}, password ==> {entry.password}");
