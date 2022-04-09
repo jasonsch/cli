@@ -13,7 +13,8 @@ namespace datpass
             Add, // Add a new entry
             Delete, // Deletes an entry
             Find, // Find entries based on a URL fragment
-            Update // Update an entry's password
+            Update, // Update an entry's password
+            Export
         }
 
         class ConfigOptions
@@ -54,7 +55,7 @@ namespace datpass
             {
                 Console.WriteLine("Error: Wrong number of args!");
             }
-            Console.WriteLine("Usage: datpass [?|h|help] [-a|--add] [-f|--file <password file>] [-s|--set <password (can be empty)>] [-u|--username] <username>] <url>");
+            Console.WriteLine("Usage: datpass [?|h|help] [-a|--add] [-e|--export] [-f|--file <password file>] [-s|--set <password (can be empty)>] [-u|--username] <username>] <url>");
             System.Environment.Exit(1);
         }
 
@@ -66,16 +67,20 @@ namespace datpass
             options.Add("?|h|help", value => { PrintUsage(); });
             options.Add("a|add", value => { config.action = PasswordAction.Add; });
             options.Add("d|delete", value => { config.action = PasswordAction.Delete; });
+            options.Add("e|export", value => { config.action = PasswordAction.Export; });
             options.Add("f|file=", value => { config.passwordFile = value; });
             options.Add("s|set=", value => { config.action = PasswordAction.Update; config.password = value; });
             options.Add("u|username=", value => { config.userName = value; });
 
             List<string> nakedParameters = options.Parse(args);
-            if (nakedParameters.Count != 1)
+            if (nakedParameters.Count == 1)
+            {
+                config.url = nakedParameters[0];
+            }
+            else if (nakedParameters.Count > 1)
             {
                 PrintUsage();
             }
-            config.url = nakedParameters[0];
 
             return config;
         }
@@ -122,6 +127,10 @@ namespace datpass
                     Console.WriteLine(entry);
                 }
             }
+            else if (config.action == PasswordAction.Export)
+            {
+                ExportPasswords(passwords);
+            }
             else
             {
                 if (UpdatePassword(passwords, config.url, config.password))
@@ -129,6 +138,11 @@ namespace datpass
                     WritePasswords(config.passwordFile, masterPassword, passwords);
                 }
             }
+        }
+
+        private static void ExportPasswords(List<PasswordEntry> passwords)
+        {
+            System.Console.WriteLine(JsonConvert.SerializeObject(passwords));
         }
 
         private static bool DeletePassword(List<PasswordEntry> passwords, string url, string userName)
@@ -169,7 +183,7 @@ namespace datpass
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="passwords"></param>
         /// <param name="url"></param>
