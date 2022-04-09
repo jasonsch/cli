@@ -14,7 +14,8 @@ namespace datpass
             Delete, // Deletes an entry
             Find, // Find entries based on a URL fragment
             Update, // Update an entry's password
-            Export
+            Export,
+            Import
         }
 
         class ConfigOptions
@@ -55,7 +56,7 @@ namespace datpass
             {
                 Console.WriteLine("Error: Wrong number of args!");
             }
-            Console.WriteLine("Usage: datpass [?|h|help] [-a|--add] [-e|--export] [-f|--file <password file>] [-s|--set <password (can be empty)>] [-u|--username] <username>] <url>");
+            Console.WriteLine("Usage: datpass [?|h|help] [-a|--add] [-d|--delete] [-e|--export] [-i|-import <password file>] [-f|--file <password file>] [-s|--set <password (can be empty)>] [-u|--username] <username>] <url>");
             System.Environment.Exit(1);
         }
 
@@ -69,6 +70,7 @@ namespace datpass
             options.Add("d|delete", value => { config.action = PasswordAction.Delete; });
             options.Add("e|export", value => { config.action = PasswordAction.Export; });
             options.Add("f|file=", value => { config.passwordFile = value; });
+            options.Add("i|import=", value => { config.action = PasswordAction.Import; config.url = value; });
             options.Add("s|set=", value => { config.action = PasswordAction.Update; config.password = value; });
             options.Add("u|username=", value => { config.userName = value; });
 
@@ -131,6 +133,10 @@ namespace datpass
             {
                 ExportPasswords(passwords);
             }
+            else if (config.action == PasswordAction.Import)
+            {
+                ImportPasswords(config.passwordFile, config.url, masterPassword);
+            }
             else
             {
                 if (UpdatePassword(passwords, config.url, config.password))
@@ -140,6 +146,14 @@ namespace datpass
             }
         }
 
+        private static void ImportPasswords(string passwordFile, string importFile, string masterPassword)
+        {
+            string passwordJson = File.ReadAllText(importFile);
+            List<PasswordEntry> passwords = JsonConvert.DeserializeObject<List<PasswordEntry>>(passwordJson);
+
+            WritePasswords(passwordFile, masterPassword, passwords);
+        }
+
         private static void ExportPasswords(List<PasswordEntry> passwords)
         {
             System.Console.WriteLine(JsonConvert.SerializeObject(passwords));
@@ -147,7 +161,7 @@ namespace datpass
 
         private static bool DeletePassword(List<PasswordEntry> passwords, string url, string userName)
         {
-            var entry = passwords.Find(pe => pe.url.Contains(url, StringComparison.CurrentCultureIgnoreCase) && pe.account == userName);
+            var entry = passwords.Find(pe => pe.url.Contains(url, StringComparison.CurrentCultureIgnoreCase) && (string.IsNullOrEmpty(userName) || pe.account == userName));
             if (entry == default(PasswordEntry))
             {
                 Console.WriteLine("Couldn't find any entry for {0}!", url);
