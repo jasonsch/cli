@@ -220,7 +220,7 @@ namespace datpass
                 }
 
                 entries[0].UpdatePassword(password);
-                Console.WriteLine("Password for {0} is now '{1}'", url, password);
+                Console.WriteLine("Password for {0} is now '{1}'", entries[0].url, password);
             }
             else
             {
