@@ -10,12 +10,12 @@ namespace datpass
     {
         enum PasswordAction
         {
-            Add, // Add a new entry
+            AddOrUpdate, // Adds a new entry if there isn't an existing one, or updates the existing one in-place
             Delete, // Deletes an entry
+            Export, // Export a file with the password information
             Find, // Find entries based on a URL fragment
-            Update, // Update an entry's password
-            Export,
-            Import
+            GeneratePassword, // Just generate a password and exit
+            Import, // Import a file with password information
         }
 
         class ConfigOptions
@@ -51,12 +51,11 @@ namespace datpass
 
         static void PrintUsage(bool invalidParameter = false)
         {
-            // TODO
             if (invalidParameter)
             {
                 Console.WriteLine("Error: Wrong number of args!");
             }
-            Console.WriteLine("Usage: datpass [?|h|help] [-a|--add] [-d|--delete] [-e|--export] [-i|-import <password file>] [-f|--file <password file>] [-s|--set <password (can be empty)>] [-u|--username] <username>] <url>");
+            Console.WriteLine("Usage: datpass [?|h|help] [-d|--delete] [-e|--export] [-i|-import <password file>] [-f|--file <password file>] [-p|--password [password]] [-u|--username <username>] <url>");
             System.Environment.Exit(1);
         }
 
@@ -66,12 +65,12 @@ namespace datpass
             ConfigOptions config = new ConfigOptions();
             OptionSet options = new OptionSet();
             options.Add("?|h|help", value => { PrintUsage(); });
-            options.Add("a|add", value => { config.action = PasswordAction.Add; });
             options.Add("d|delete", value => { config.action = PasswordAction.Delete; });
             options.Add("e|export", value => { config.action = PasswordAction.Export; });
             options.Add("f|file=", value => { config.passwordFile = value; });
+            options.Add("g|generate", value => { config.action = PasswordAction.GeneratePassword; });
             options.Add("i|import=", value => { config.action = PasswordAction.Import; config.url = value; });
-            options.Add("s|set=", value => { config.action = PasswordAction.Update; config.password = value; });
+            options.Add("p|password=", value => { config.action = PasswordAction.AddOrUpdate; if (value != "p" && value != "password") { config.password = value; } });
             options.Add("u|username=", value => { config.userName = value; });
 
             List<string> nakedParameters = options.Parse(args);
@@ -102,14 +101,19 @@ namespace datpass
         {
             var config = ParseParameters(args);
 
+            if (config.action == PasswordAction.GeneratePassword)
+            {
+                GeneratePassword();
+                System.Environment.Exit(0);
+            }
+
             Console.WriteLine("Master password: ");
             string masterPassword = ReadMaskedString();
 
             List<PasswordEntry> passwords = ReadPasswords(config.passwordFile, masterPassword);
-
-            if (config.action == PasswordAction.Add)
+            if (config.action == PasswordAction.AddOrUpdate)
             {
-                if (AddPassword(passwords, config.url, config.userName))
+                if (AddPassword(passwords, config.url, config.userName, config.password))
                 {
                     WritePasswords(config.passwordFile, masterPassword, passwords);
                 }
@@ -133,17 +137,18 @@ namespace datpass
             {
                 ExportPasswords(passwords);
             }
-            else if (config.action == PasswordAction.Import)
-            {
-                ImportPasswords(config.passwordFile, config.url, masterPassword);
-            }
             else
             {
-                if (UpdatePassword(passwords, config.url, config.password))
-                {
-                    WritePasswords(config.passwordFile, masterPassword, passwords);
-                }
+                System.Diagnostics.Debug.Assert(config.action == PasswordAction.Import);
+                ImportPasswords(config.passwordFile, config.url, masterPassword);
             }
+        }
+
+        private static void GeneratePassword()
+        {
+            var generator = new PasswordGenerator(10, 15);
+            generator.AddAllGenerators();
+            System.Console.WriteLine("password ==> {0}", generator.Generate());
         }
 
         private static void ImportPasswords(string passwordFile, string importFile, string masterPassword)
@@ -173,22 +178,32 @@ namespace datpass
             return true;
         }
 
-        private static bool AddPassword(List<PasswordEntry> passwords, string url, string userName)
+        private static bool AddPassword(List<PasswordEntry> passwords, string url, string userName, string password)
         {
+            if (string.IsNullOrEmpty(password))
+            {
+                var passwordGenerator = new PasswordGenerator(10, 15);
+                passwordGenerator.AddAllGenerators();
+                password = passwordGenerator.Generate();
+                Console.WriteLine("Generated password for {0}/{1} is {2}", url, userName, password);
+            }
+
             var entries = passwords.FindAll(pe => pe.url.Contains(url, StringComparison.CurrentCultureIgnoreCase) && pe.account == userName);
             if (entries.Count != 0)
             {
-                Console.WriteLine("There's an existing entry for {0} / {1}", url, userName);
-                return false;
+                if (entries.Count != 1)
+                {
+                    // TODO -- Give the user a way to negotiate this?
+                    Console.WriteLine("Error: There are multiple entries that match the given criteria?!?");
+                    return false;
+                }
+                Console.WriteLine("Updating existing entry for {0} / {1}", url, userName);
+                entries[0].UpdatePassword(password);
+                return true;
             }
 
             Console.Write("Title: ");
             string title = Console.ReadLine();
-
-            var passwordGenerator = new PasswordGenerator(10, 15);
-            passwordGenerator.AddAllGenerators();
-            string password = passwordGenerator.Generate();
-            Console.WriteLine("Password for {0}/{1} is {2}", url, userName, password);
 
             var pe = new PasswordEntry(url, userName, password, title);
             passwords.Add(pe);

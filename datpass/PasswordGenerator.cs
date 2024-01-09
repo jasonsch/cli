@@ -15,7 +15,7 @@ namespace datpass
     class PasswordGenerator
     {
         private readonly Random random = new System.Random();
-        private readonly IList<Func<char>> Generators = new List<Func<char>>();
+        private readonly IList<Func<char>> mGenerators = new List<Func<char>>();
 
         public int MinimumLength { get; set; }
         public int MaximumLength { get; set; }
@@ -33,17 +33,17 @@ namespace datpass
         {
             if ((Type & GeneratorType.Alpha) != 0)
             {
-                Generators.Add(GenerateAlpha);
+                mGenerators.Add(GenerateAlpha);
             }
 
             if ((Type & GeneratorType.Numeric) != 0)
             {
-                Generators.Add(GenerateNumber);
+                mGenerators.Add(GenerateNumber);
             }
 
             if ((Type & GeneratorType.Symbols) != 0)
             {
-                Generators.Add(GenerateSymbol);
+                mGenerators.Add(GenerateSymbol);
             }
         }
 
@@ -68,8 +68,8 @@ namespace datpass
 
             for (int i = 0; i < Length; ++i)
             {
-                int GeneratorIndex = random.Next(0, Generators.Count - 1);
-                Password.Append(Generators[GeneratorIndex].Invoke());
+                int index = random.Next(0, mGenerators.Count);
+                Password.Append(mGenerators[index].Invoke());
             }
 
             return Password.ToString();
